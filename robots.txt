@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /backup_maryandthedogs_original.html
+
+Sitemap: https://www.maryandthedogs.de/sitemap.xml
