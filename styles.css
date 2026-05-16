@@ -1097,6 +1097,14 @@ footer {
   transition: opacity .25s;
 }
 .cookie-btn-accept:hover { opacity: .85; }
+.cookie-list {
+  margin: 6px 0 8px 0;
+  padding-left: 18px;
+  font-size: .82rem;
+  color: rgba(30,26,20,.7);
+  line-height: 1.7;
+}
+.cookie-list li { margin-bottom: 2px; }
 @media (max-width: 600px) {
   .cookie-inner { gap: 16px; }
   .cookie-buttons { width: 100%; }
