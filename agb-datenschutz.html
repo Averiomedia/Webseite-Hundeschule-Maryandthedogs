@@ -7,9 +7,7 @@
   <title>AGB &amp; Datenschutz | Mary and the Dogs</title>
   <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="https://www.maryandthedogs.de/agb-datenschutz.html" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="cookie-consent.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -35,6 +33,20 @@
   </style>
 </head>
 <body>
+<!-- Cookie Banner -->
+<div id="cookie-banner" class="cookie-banner">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <strong>Cookies &amp; externe Dienste</strong>
+      <p>Diese Website lädt Schriftarten von Google Fonts sowie Animationsbibliotheken von externen Servern (Cloudflare, jsDelivr). Dabei werden technische Daten an Server in den USA übertragen. <a href="agb-datenschutz.html">Datenschutz</a></p>
+    </div>
+    <div class="cookie-buttons">
+      <button id="cookie-decline" class="cookie-btn-decline">Nur Notwendige</button>
+      <button id="cookie-accept" class="cookie-btn-accept">Akzeptieren</button>
+    </div>
+  </div>
+</div>
+
 <div id="cursor"></div>
 <div id="cursor-follower"></div>
 
@@ -136,21 +148,58 @@
       <hr class="legal-divider" />
 
       <!-- Datenschutz -->
-      <div class="legal-section-title">Datenschutz</div>
+      <div class="legal-section-title">Datenschutzerklärung</div>
+      <p style="font-size:.85rem;color:rgba(30,26,20,.5);margin-bottom:24px">Gemäß DSGVO (EU) 2016/679 und BDSG</p>
 
-      <h2>Erhebung und Verarbeitung personenbezogener Daten</h2>
-      <p>Persönliche Daten (z. B. Name, E-Mail-Adresse, Telefonnummer) werden gespeichert und unter Beachtung des Bundesdatenschutzgesetzes (BDSG) sowie der Datenschutz-Grundverordnung (DSGVO) verarbeitet. Eine Weitergabe an Dritte erfolgt nicht.</p>
-
-      <h2>Zweck der Datenverarbeitung</h2>
-      <p>Die Daten werden ausschließlich zur Durchführung der vereinbarten Trainingsleistungen, zur Kommunikation mit dem Kunden und zur Buchführung verwendet.</p>
-
-      <h2>Ihre Rechte</h2>
-      <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Wenden Sie sich hierfür an:</p>
-      <p><strong>Marie Böttiger</strong><br/>
+      <h2>1. Verantwortliche Stelle</h2>
+      <p><strong>Marie Böttiger</strong> · Mary and the Dogs<br/>
+      Weiboldshausenerstr. 3, 91781 Weißenburg<br/>
       <a href="mailto:info@maryandthedogs.de">info@maryandthedogs.de</a> · 0174 9044207</p>
 
-      <h2>Cookies</h2>
-      <p>Diese Website verwendet keine eigenen Tracking-Cookies. Es können technisch notwendige Cookies von eingebundenen Drittdiensten gesetzt werden.</p>
+      <hr class="legal-divider" />
+
+      <h2>2. Erhebung personenbezogener Daten</h2>
+      <p>Personenbezogene Daten (Name, E-Mail, Telefon) werden ausschließlich erhoben, wenn Sie uns aktiv kontaktieren. Diese werden zur Durchführung der vereinbarten Trainingsleistungen, zur Kommunikation und zur Buchführung verwendet. Eine Weitergabe an Dritte erfolgt nicht.</p>
+      <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
+
+      <hr class="legal-divider" />
+
+      <h2>3. Cookies &amp; Speicherung im Browser</h2>
+      <p>Diese Website setzt ein technisch notwendiges Cookie (<code>mad_consent</code>) im lokalen Speicher (localStorage) Ihres Browsers, um Ihre Cookie-Einwilligung zu speichern. Es werden keine Tracking- oder Werbe-Cookies verwendet.</p>
+
+      <hr class="legal-divider" />
+
+      <h2>4. Google Fonts</h2>
+      <p>Diese Website nutzt bei Ihrer Zustimmung Schriftarten des Dienstes Google Fonts (Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA). Dabei wird Ihre IP-Adresse an Google-Server in den USA übertragen. Google Fonts wird erst nach Ihrer ausdrücklichen Zustimmung geladen.</p>
+      <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+
+      <hr class="legal-divider" />
+
+      <h2>5. Externe JavaScript-Bibliotheken (CDN)</h2>
+      <p>Für Animationen verwendet diese Website GSAP (via Cloudflare CDN, Cloudflare Inc., USA) und Lenis (via jsDelivr, ProspectOne, USA). Diese Bibliotheken werden zur technischen Funktionsfähigkeit der Website benötigt und enthalten keine Tracking-Funktionen. Bei deren Aufruf wird Ihre IP-Adresse technisch an die jeweiligen CDN-Server übertragen.</p>
+      <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der fehlerfreien Darstellung der Website).</p>
+
+      <hr class="legal-divider" />
+
+      <h2>6. Hosting (GitHub Pages)</h2>
+      <p>Diese Website wird über GitHub Pages (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Seite werden technische Zugriffsdaten (IP-Adresse, Browsertyp, Zeitstempel) in Server-Logs gespeichert. Diese Daten werden nicht mit anderen Datenquellen zusammengeführt.</p>
+      <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Weitere Informationen: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages" target="_blank" rel="noopener">GitHub Pages Datenschutz</a></p>
+
+      <hr class="legal-divider" />
+
+      <h2>7. Ihre Rechte (DSGVO Art. 15–22)</h2>
+      <p>Sie haben jederzeit das Recht auf:</p>
+      <ul style="margin:8px 0 14px 20px">
+        <li style="font-size:.92rem;line-height:1.85;color:rgba(30,26,20,.72)"><strong>Auskunft</strong> über gespeicherte Daten (Art. 15)</li>
+        <li style="font-size:.92rem;line-height:1.85;color:rgba(30,26,20,.72)"><strong>Berichtigung</strong> unrichtiger Daten (Art. 16)</li>
+        <li style="font-size:.92rem;line-height:1.85;color:rgba(30,26,20,.72)"><strong>Löschung</strong> Ihrer Daten (Art. 17)</li>
+        <li style="font-size:.92rem;line-height:1.85;color:rgba(30,26,20,.72)"><strong>Einschränkung</strong> der Verarbeitung (Art. 18)</li>
+        <li style="font-size:.92rem;line-height:1.85;color:rgba(30,26,20,.72)"><strong>Widerspruch</strong> gegen die Verarbeitung (Art. 21)</li>
+        <li style="font-size:.92rem;line-height:1.85;color:rgba(30,26,20,.72)"><strong>Datenübertragbarkeit</strong> (Art. 20)</li>
+        <li style="font-size:.92rem;line-height:1.85;color:rgba(30,26,20,.72)"><strong>Widerruf</strong> einer erteilten Einwilligung jederzeit</li>
+      </ul>
+      <p>Anfragen richten Sie an: <a href="mailto:info@maryandthedogs.de">info@maryandthedogs.de</a></p>
+      <p>Zudem haben Sie das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren: <strong>Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)</strong>, Promenade 27, 91522 Ansbach, <a href="https://www.lda.bayern.de" target="_blank" rel="noopener">www.lda.bayern.de</a></p>
 
     </div>
   </div>
