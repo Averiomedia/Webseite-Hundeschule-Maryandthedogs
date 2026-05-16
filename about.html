@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Über Marie Böttiger – Hundetrainerin bei Mary and the Dogs in Weißenburg. Ausbildung, Qualifikationen und das Team." />
+  <title>Über mich | Mary and the Dogs</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Page-hero for about page */
+    .page-hero {
+      padding: 160px 0 80px;
+      background: var(--bg);
+      text-align: center;
+    }
+    .page-hero .section-tag { margin-bottom: 16px; display: block; }
+    .page-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .page-hero .gold-line { margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+
+<!-- ── Navigation ─────────────────────────────────────── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="Logo2.png" alt="Mary and the Dogs" class="logo-img" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Start</a></li>
+    <li><a href="about.html" class="active">Über mich</a></li>
+    <li class="has-dropdown">
+      <a href="index.html#services">Trainingsangebot</a>
+      <ul class="dropdown">
+        <li><a href="einzeltraining.html">Einzeltraining</a></li>
+        <li><a href="gruppentraining.html">Gruppentraining</a></li>
+        <li><a href="onlinetraining.html">Onlinetraining</a></li>
+        <li><a href="sonderkurse.html">Sonderkurse</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#cta">Kontakt</a></li>
+  </ul>
+  <a href="mailto:info@maryandthedogs.de" class="nav-cta">Training anfragen</a>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html">Start</a>
+  <a href="about.html">Über mich</a>
+  <a href="index.html#services">Trainingsangebot</a>
+  <a href="index.html#cta">Kontakt</a>
+</div>
+
+<!-- ── Page Hero ─────────────────────────────────────── -->
+<div class="page-hero">
+  <div class="container">
+    <span class="section-tag">Über mich</span>
+    <h1>Hi, ich bin Marie.</h1>
+    <div class="gold-line"></div>
+  </div>
+</div>
+
+<!-- ── Über mich ───────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-image-wrap reveal-left">
+        <div class="about-corner"></div>
+        <div class="about-image-frame">
+          <img src="Über-Mich-Bild.jpg" alt="Marie Böttiger – Mary and the Dogs" loading="lazy" />
+        </div>
+        <div class="about-badge">
+          <div class="num" data-count="3">0+</div>
+          <div class="label">Jahre eigene Schule</div>
+        </div>
+      </div>
+
+      <div class="about-text reveal-right">
+        <p class="section-lead">
+          Hunde waren schon immer meine Leidenschaft — das Training mit Hund und Mensch als Team irgendwann auch.
+        </p>
+        <p class="section-lead" style="margin-top:16px">
+          2022 absolvierte ich eine Ausbildung zur Hundetrainerin. Mit dem Abschluss dieser Ausbildung und Sonderseminaren mit den Schwerpunkten Mehrhundehaltung, Leinenführigkeit, Körpersprache des Hundes und Mantrailing arbeitete ich bis zuletzt in einer tollen Hundeschule als Trainerin für Alltagstraining, Leinenführigkeitskurse &amp; Begegnungstraining mit.
+        </p>
+        <p class="section-lead" style="margin-top:16px">
+          Schnell merkte ich, dass ich noch mehr möchte: meine eigene Hundeschule — auf einem eigenen Hundetrainingsplatz. Heute zeigst du mir deinen Hund und gemeinsam erarbeiten wir Lösungen!
+        </p>
+        <p class="section-lead" style="margin-top:16px">
+          Ich glaube, dass jeder von uns etwas hat, wofür er brennt! Für mich ist es das Training und die Arbeit mit Hunden.
+        </p>
+
+        <div class="about-stats stagger-parent" style="margin-top:40px">
+          <div class="stat-card stagger-child">
+            <div class="n" data-count="200">0+</div>
+            <div class="l">Beratungen durchgeführt</div>
+          </div>
+          <div class="stat-card stagger-child">
+            <div class="n" data-count="50">0+</div>
+            <div class="l">Hunderassen betreut</div>
+          </div>
+          <div class="stat-card stagger-child">
+            <div class="n">☀</div>
+            <div class="l">Mo–Fr 16–21 Uhr · Sa 9–21 Uhr</div>
+          </div>
+          <div class="stat-card stagger-child">
+            <div class="n">📍</div>
+            <div class="l">Weißenburg, Bayern</div>
+          </div>
+        </div>
+
+        <div style="margin-top:36px">
+          <a href="mailto:info@maryandthedogs.de" class="btn-primary">Training anfragen</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Meet the Team ───────────────────────────────────── -->
+<section id="team">
+  <div class="container">
+    <div class="team-header">
+      <span class="section-tag reveal-up">Meet the Team</span>
+      <h2 class="section-title animate-title">Meine Hunde</h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- Hati -->
+      <div class="dog-card" data-dog="hati">
+        <div class="dog-card-inner">
+          <div class="dog-image-wrap">
+            <img src="Hati.png" alt="Hati – Malinois-Mischling" loading="lazy" />
+            <div class="dog-image-overlay"></div>
+          </div>
+          <div class="dog-info">
+            <div class="dog-breed-tag">Malinois-Mischling</div>
+            <h3 class="dog-name">Hati</h3>
+            <p class="dog-desc">
+              Hati war ursprünglich nicht als „mein" Hund geplant. Nun jedoch bleibt er bei mir &amp; wird durch mich im Such- und Schutzhundesport geführt.
+            </p>
+            <div class="dog-tags">
+              <span>Such­hund­sport</span>
+              <span>Schutz­hund­sport</span>
+            </div>
+          </div>
+        </div>
+        <div class="dog-card-number">01</div>
+      </div>
+
+      <!-- Whiskey -->
+      <div class="dog-card" data-dog="whiskey">
+        <div class="dog-card-inner">
+          <div class="dog-image-wrap">
+            <img src="Whiskey.png" alt="Whiskey – Rhodesian Ridgeback Mischling" loading="lazy" />
+            <div class="dog-image-overlay"></div>
+          </div>
+          <div class="dog-info">
+            <div class="dog-breed-tag">Rh. Ridgeback-Mischling</div>
+            <h3 class="dog-name">Whiskey</h3>
+            <p class="dog-desc">
+              Whiskey &amp; ich sind aktiv in der Rettungshundestaffel tätig. Gerade befindet er sich noch in der Ausbildung zum Einsatz-Mantrail-Hund.
+            </p>
+            <div class="dog-tags">
+              <span>Rettungs­hund</span>
+              <span>Mantrailing</span>
+            </div>
+          </div>
+        </div>
+        <div class="dog-card-number">02</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Qualifikationen ─────────────────────────────────── -->
+<section id="qualifications">
+  <div class="container">
+    <div class="quali-layout">
+
+      <div class="quali-left reveal-left">
+        <span class="section-tag">Qualifikationen</span>
+        <h2 class="section-title animate-title">Ausbildung &amp;<br/>Weiterbildung</h2>
+        <div class="gold-line"></div>
+        <p class="section-lead">
+          Kontinuierliches Lernen ist für mich selbstverständlich — damit du und dein Hund immer vom neuesten Stand der Hundewissenschaft profitieren.
+        </p>
+
+        <div class="quali-highlights">
+          <div class="quali-highlight-item">
+            <div class="qh-icon">🏅</div>
+            <div>
+              <strong>Erlaubnis nach §11 Abs.&nbsp;1 Nr.&nbsp;8f TSchG</strong>
+              <span>Staatlich anerkannte Hundetrainerin</span>
+            </div>
+          </div>
+          <div class="quali-highlight-item">
+            <div class="qh-icon">🎓</div>
+            <div>
+              <strong>Hundetrainerausbildung „Hundewissenschaften"</strong>
+              <span>ATN-Akademie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quali-right reveal-right">
+        <div class="seminars-title">Absolvierte Seminare</div>
+        <ul class="seminar-list">
+          <li><span class="seminar-dot"></span><span>Mehrhundehaltung — <em>Ute Heberer</em></span></li>
+          <li><span class="seminar-dot"></span><span>Antijagdtraining — <em>Ines Scheuer-Dinger</em></span></li>
+          <li><span class="seminar-dot"></span><span>Antijagdtraining — <em>Kristina Ziemer-Falke / Jörg Ziemer</em></span></li>
+          <li><span class="seminar-dot"></span><span>Ausdrucksverhalten des Hundes I, II, III — <em>Gerrit Stephan</em></span></li>
+          <li><span class="seminar-dot"></span><span>Ethologische Grundlagen und Ontogenese — <em>Gerd Schreiber</em></span></li>
+          <li><span class="seminar-dot"></span><span>Konditionierte Entspannung — <em>Gerd Schreiber</em></span></li>
+          <li><span class="seminar-dot"></span><span>Lern- und Verhaltenstheorie — <em>Gerd Schreiber</em></span></li>
+          <li><span class="seminar-dot"></span><span>Lerntheorie I–V — <em>Nerina Aupperle</em></span></li>
+          <li><span class="seminar-dot"></span><span>Mit dem Hund unterwegs — <em>Gerd Schreiber</em></span></li>
+          <li><span class="seminar-dot"></span><span>Mantrailing</span></li>
+          <li><span class="seminar-dot"></span><span>Mantrailing Quality AT</span></li>
+          <li><span class="seminar-dot"></span><span>Grundlagen der Blockadenlösung</span></li>
+          <li><span class="seminar-dot"></span><span>Territorialverhalten &amp; Trainingsmethoden — <em>Gerd Schreiber</em></span></li>
+          <li><span class="seminar-dot"></span><span>Territorialverhalten, Bellverhalten &amp; Hyperaktivität — <em>Maria Hense</em></span></li>
+          <li><span class="seminar-dot"></span><span>Trennungsproblemen wirksam vorbeugen — <em>Gerrit Stephan</em></span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────── -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <span class="section-tag reveal-up">Bereit für den nächsten Schritt?</span>
+    <h2 class="section-title animate-title">Starte heute mit deinem Hund.</h2>
+    <div class="gold-line" style="margin:24px auto"></div>
+    <p class="section-lead reveal-up">Melde dich einfach — ich freue mich auf euch. Das erste Gespräch ist kostenlos und unverbindlich.</p>
+    <div style="margin-top:40px" class="reveal-up">
+      <a href="mailto:info@maryandthedogs.de" class="btn-primary">Training anfragen</a>
+    </div>
+    <div class="cta-contact reveal-up">
+      <div class="contact-item">
+        <span class="label">E-Mail</span>
+        <a href="mailto:info@maryandthedogs.de" class="value">info@maryandthedogs.de</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">Telefon</span>
+        <a href="tel:+4917490442070" class="value">0174 9044207</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">Standort</span>
+        <span class="value">Weißenburg, Bayern</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:14px">
+          <img src="Logo2.png" alt="Mary and the Dogs" class="logo-img" style="height:44px" />
+        </a>
+        <p>Professionelles Hundetraining mit Herz — in Weißenburg und Umgebung. Einzel-, Gruppen- und Onlinetraining für Mensch und Hund.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="about.html">Über mich</a></li>
+          <li><a href="index.html#services">Trainingsangebot</a></li>
+          <li><a href="index.html#process">Ablauf</a></li>
+          <li><a href="index.html#testimonials">Stimmen</a></li>
+          <li><a href="index.html#cta">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="agb-datenschutz.html">AGB &amp; Datenschutz</a></li>
+          <li><a href="haftungsausschluss.html">Haftungsausschluss</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mary and the Dogs · Marie Böttiger · Alle Rechte vorbehalten</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" aria-label="Instagram">ig</a>
+        <a href="#" class="social-btn" aria-label="Facebook">fb</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+/* ── Lenis smooth scroll ──────────────────────────────── */
+const lenis = new Lenis({ lerp: 0.08, smooth: true });
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── Custom cursor ───────────────────────────────────── */
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursor-follower');
+if (cursor && follower) {
+  document.addEventListener('mousemove', e => {
+    gsap.set(cursor, { x: e.clientX, y: e.clientY });
+    gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.4, ease: 'power2.out' });
+  });
+}
+
+/* ── Nav active on scroll ─────────────────────────────── */
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Nav entrance ─────────────────────────────────────── */
+gsap.from('nav', { y: -80, opacity: 0, duration: 1, ease: 'power3.out' });
+
+/* ── Reveal animations (gsap.to — CSS setzt opacity:0 als Start) ── */
+document.querySelectorAll('.reveal-up').forEach(el => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out'
+  });
+});
+document.querySelectorAll('.reveal-left').forEach(el => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+    opacity: 1, x: 0, duration: 0.9, ease: 'power3.out'
+  });
+});
+document.querySelectorAll('.reveal-right').forEach(el => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+    opacity: 1, x: 0, duration: 0.9, ease: 'power3.out'
+  });
+});
+
+/* ── Stagger children ────────────────────────────────── */
+document.querySelectorAll('.stagger-parent').forEach(parent => {
+  const children = parent.querySelectorAll('.stagger-child');
+  gsap.to(children, {
+    scrollTrigger: { trigger: parent, start: 'top 95%', once: true },
+    opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out'
+  });
+});
+
+/* ── Animate titles ──────────────────────────────────── */
+document.querySelectorAll('.animate-title').forEach(el => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out'
+  });
+});
+
+/* ScrollTrigger refresh nach Fonts/Bildern */
+window.addEventListener('load', () => setTimeout(() => ScrollTrigger.refresh(), 300));
+
+/* ── Dog cards entrance ──────────────────────────────── */
+document.querySelectorAll('.dog-card').forEach((card, i) => {
+  gsap.to(card, {
+    scrollTrigger: { trigger: card, start: 'top 88%', once: true },
+    opacity: 1, y: 0, duration: 0.7, delay: i * 0.15, ease: 'power3.out'
+  });
+});
+
+/* ── Counter animation ───────────────────────────────── */
+document.querySelectorAll('[data-count]').forEach(el => {
+  const target = parseInt(el.dataset.count);
+  ScrollTrigger.create({
+    trigger: el, start: 'top 88%', once: true,
+    onEnter: () => {
+      gsap.to({ val: 0 }, {
+        val: target, duration: 1.6, ease: 'power2.out',
+        onUpdate: function() { el.textContent = Math.round(this.targets()[0].val) + '+'; }
+      });
+    }
+  });
+});
+
+/* ── Seminar list entrance ───────────────────────────── */
+const seminars = document.querySelectorAll('.seminar-list li');
+if (seminars.length) {
+  gsap.from(seminars, {
+    scrollTrigger: { trigger: '.seminar-list', start: 'top 85%', once: true },
+    opacity: 0, x: 20, duration: 0.45, stagger: 0.04, ease: 'power2.out'
+  });
+}
+
+/* ── Hamburger mobile menu ───────────────────────────── */
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+  });
+}
+</script>
+</body>
+</html>

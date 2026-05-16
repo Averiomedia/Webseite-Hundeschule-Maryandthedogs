@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Onlinetraining bei Mary and the Dogs – flexibles Hundetraining von zuhause mit Marie Böttiger." />
+  <title>Onlinetraining | Mary and the Dogs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-hero { padding: 150px 0 70px; background: var(--bg); }
+    .page-hero .section-tag { display: block; margin-bottom: 14px; }
+    .page-hero h1 { font-family: var(--font-serif); font-size: clamp(2.6rem,5vw,4.5rem); color: var(--text); line-height: 1.1; margin-bottom: 16px; }
+    .page-hero .section-lead { max-width: 580px; }
+    .page-hero .gold-line { margin: 20px 0 32px; }
+
+    .online-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 70px 0; }
+    .online-card { background: #fff; border-radius: 18px; padding: 36px 30px; box-shadow: 0 6px 32px rgba(139,94,60,.1); border: 1px solid rgba(139,94,60,.12); display: flex; flex-direction: column; }
+    .online-card.highlight { background: var(--brown); }
+    .online-num { font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700; color: rgba(139,94,60,.1); line-height: 1; margin-bottom: 12px; }
+    .online-card.highlight .online-num { color: rgba(255,255,255,.15); }
+    .online-title { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; margin-bottom: 14px; color: var(--text); }
+    .online-card.highlight .online-title { color: #fff; }
+    .online-desc { font-size: .88rem; line-height: 1.78; color: rgba(30,26,20,.68); flex: 1; margin-bottom: 24px; }
+    .online-card.highlight .online-desc { color: rgba(255,255,255,.82); }
+    .online-meta { border-top: 1px solid rgba(139,94,60,.12); padding-top: 18px; display: flex; flex-direction: column; gap: 6px; }
+    .online-card.highlight .online-meta { border-top-color: rgba(255,255,255,.2); }
+    .online-meta span { font-size: .8rem; color: rgba(30,26,20,.6); display: flex; align-items: center; gap: 8px; }
+    .online-card.highlight .online-meta span { color: rgba(255,255,255,.8); }
+    .online-price { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--brown); margin-top: 14px; }
+    .online-card.highlight .online-price { color: #fff; }
+
+    .info-box { background: var(--surface); border-radius: 16px; padding: 28px 32px; border-left: 3px solid var(--brown); }
+    .info-box h4 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 10px; }
+    .info-box p { font-size: .87rem; color: rgba(30,26,20,.7); line-height: 1.7; }
+
+    .section-cta { text-align: center; padding: 60px 0; background: var(--surface); }
+    .section-cta h3 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 16px; }
+
+    .page-gallery-strip { display: grid; grid-template-columns: repeat(4, 1fr); height: 52vh; }
+    .page-gallery-item { overflow: hidden; }
+    .page-gallery-item img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform .5s ease; }
+    .page-gallery-item:hover img { transform: scale(1.05); }
+
+    @media (max-width: 900px) { .online-grid { grid-template-columns: 1fr 1fr; } .page-gallery-strip { grid-template-columns: repeat(2, 1fr); height: 44vh; } }
+    @media (max-width: 600px) { .online-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="Logo2.png" alt="Mary and the Dogs" class="logo-img" />
+    <span class="logo-text">Mary and the Dogs</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Start</a></li>
+    <li><a href="about.html">Über mich</a></li>
+    <li class="has-dropdown">
+      <a href="index.html#services" class="active">Trainingsangebot</a>
+      <ul class="dropdown">
+        <li><a href="einzeltraining.html">Einzeltraining</a></li>
+        <li><a href="gruppentraining.html">Gruppentraining</a></li>
+        <li><a href="onlinetraining.html">Onlinetraining</a></li>
+        <li><a href="sonderkurse.html">Sonderkurse</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#cta">Kontakt</a></li>
+  </ul>
+  <a href="mailto:info@maryandthedogs.de" class="nav-cta">Training anfragen</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Start</a>
+  <a href="about.html">Über mich</a>
+  <a href="einzeltraining.html">Einzeltraining</a>
+  <a href="gruppentraining.html">Gruppentraining</a>
+  <a href="onlinetraining.html">Onlinetraining</a>
+  <a href="sonderkurse.html">Sonderkurse</a>
+  <a href="index.html#cta">Kontakt</a>
+</div>
+
+<!-- Hero -->
+<section class="page-hero">
+  <div class="container">
+    <span class="section-tag">Trainingsangebot</span>
+    <h1>Onlinetraining</h1>
+    <div class="gold-line"></div>
+    <p class="section-lead">Flexibel von zuhause aus — für ausgewählte Themen, bei räumlicher Entfernung oder zur Begleitung zwischen den Präsenzterminen.</p>
+  </div>
+</section>
+
+<!-- Bildergalerie -->
+<div class="page-gallery-strip">
+  <div class="page-gallery-item"><img src="Bildergalerie/IMG_7159.jpg" alt="Training" /></div>
+  <div class="page-gallery-item"><img src="Bildergalerie/IMG_7173.jpg" alt="Training" /></div>
+  <div class="page-gallery-item"><img src="Bildergalerie/IMG_7067.jpg" alt="Training" /></div>
+  <div class="page-gallery-item"><img src="Bildergalerie/IMG_7137.jpg" alt="Training" /></div>
+</div>
+
+<!-- Karten -->
+<section style="background: var(--surface)">
+  <div class="container">
+    <div class="online-grid">
+
+      <div class="online-card reveal-up">
+        <div class="online-num">01</div>
+        <div class="online-title">Einzelstunde Online</div>
+        <p class="online-desc">Für Hundehalter, die bereits Grundlagen kennen und den letzten Feinschliff suchen. Via Zoom oder Google Meet — live, persönlich und gezielt. Ich beantworte eure Fragen, arbeite kleinere Trainingsanpassungen durch und gebe Tipps zur Hundebeschäftigung.</p>
+        <div class="online-meta">
+          <span>⏱ 45–60 Minuten</span>
+          <span>💻 Zoom oder Google Meet</span>
+          <span>📱 Gerät mit Kamera &amp; Mikrofon nötig</span>
+          <span>📅 Buchung telefonisch oder per E-Mail</span>
+        </div>
+        <div class="online-price">25,00 €</div>
+      </div>
+
+      <div class="online-card highlight reveal-up">
+        <div class="online-num">02</div>
+        <div class="online-title">Video-Verhaltensanalyse</div>
+        <p class="online-desc">Für Kunden mit räumlicher Entfernung oder Zeitproblemen. Ihr sendet mir Videos mit problematischen Verhaltensweisen eures Hundes — ich analysiere sie und erarbeite mit euch gemeinsam Lösungen inklusive Trainingsplan.</p>
+        <div class="online-meta">
+          <span>⏱ 45–60 Minuten</span>
+          <span>🎥 Videoanalyse + Feedback</span>
+          <span>📋 Inkl. Trainingsplan</span>
+          <span>📅 Buchung telefonisch oder per E-Mail</span>
+        </div>
+        <div class="online-price">30,00 €</div>
+      </div>
+
+      <div class="online-card reveal-up">
+        <div class="online-num">03</div>
+        <div class="online-title">Online-Seminare</div>
+        <p class="online-desc">Selbstgesteuertes Videotraining — flexibel, wann es euch passt. Nach dem Kauf erhaltet ihr die Zugangsdaten per E-Mail. Keine aufwändigen Studioproduktionen, sondern ehrliche, praxisnahe Inhalte.</p>
+        <div class="online-meta">
+          <span>🕐 Flexibel jederzeit abrufbar</span>
+          <span>📧 Zugangsdaten per E-Mail</span>
+          <span>📅 Auf Anfrage erhältlich</span>
+        </div>
+        <div class="online-price" style="color:var(--brown)">Auf Anfrage</div>
+      </div>
+
+    </div>
+
+    <div class="info-box reveal-up" style="max-width:600px; margin: 0 auto 70px">
+      <h4>Buchung &amp; Voraussetzungen</h4>
+      <p>Die Einzelstunde und die Video-Verhaltensanalyse sind telefonisch oder per E-Mail buchbar. Für die Onlinestunde benötigt ihr ein Gerät mit Kamera und Mikrofon.</p>
+      <p style="margin-top:10px"><strong>info@maryandthedogs.de</strong> · <strong>0174 9044207</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="section-cta">
+  <div class="container reveal-up">
+    <h3>Fragen zum Onlinetraining?</h3>
+    <p class="section-lead" style="margin: 0 auto 32px">Meldet euch einfach — ich erkläre euch gern, welches Format am besten zu euch passt.</p>
+    <a href="mailto:info@maryandthedogs.de" class="btn-primary">Training anfragen</a>
+  </div>
+</div>
+
+<!-- Weitere Trainingsangebote -->
+<section class="training-nav-strip">
+  <div class="container">
+    <h3>Weitere Trainingsangebote</h3>
+    <div class="gold-line"></div>
+    <div class="training-nav-cards">
+      <a href="einzeltraining.html" class="training-nav-card">
+        <span class="training-nav-card-icon">🎯</span>
+        <div class="training-nav-card-title">Einzeltraining</div>
+        <p class="training-nav-card-desc">Maßgeschneidert für euch — persönlich, intensiv und ganz auf euren Alltag abgestimmt.</p>
+        <span class="training-nav-card-link">Mehr erfahren →</span>
+      </a>
+      <a href="gruppentraining.html" class="training-nav-card">
+        <span class="training-nav-card-icon">🐾</span>
+        <div class="training-nav-card-title">Gruppentraining</div>
+        <p class="training-nav-card-desc">Weltenentdecker, Leinenhelden, Champions, Social-Walk & Walk&nbsp;&amp;&nbsp;Talk — Training mit Gleichgesinnten.</p>
+        <span class="training-nav-card-link">Mehr erfahren →</span>
+      </a>
+      <a href="sonderkurse.html" class="training-nav-card">
+        <span class="training-nav-card-icon">🌟</span>
+        <div class="training-nav-card-title">Sonderkurse</div>
+        <p class="training-nav-card-desc">Themenbasierte Kurse zu besonderen Schwerpunkten — saisonal und nach Bedarf.</p>
+        <span class="training-nav-card-link">Mehr erfahren →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:14px">
+          <img src="Logo2.png" alt="Mary and the Dogs" class="logo-img" style="height:44px" />
+        </a>
+        <p>Professionelles Hundetraining mit Herz — in Weißenburg und Umgebung.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="about.html">Über mich</a></li>
+          <li><a href="einzeltraining.html">Einzeltraining</a></li>
+          <li><a href="gruppentraining.html">Gruppentraining</a></li>
+          <li><a href="onlinetraining.html">Onlinetraining</a></li>
+          <li><a href="sonderkurse.html">Sonderkurse</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="agb-datenschutz.html">AGB &amp; Datenschutz</a></li>
+          <li><a href="haftungsausschluss.html">Haftungsausschluss</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mary and the Dogs · Marie Böttiger · Alle Rechte vorbehalten</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis = new Lenis({ lerp: 0.08 });
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursor-follower');
+let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.1, ease: 'none' });
+});
+(function followLoop() {
+  followerX += (mouseX - followerX) * 0.1;
+  followerY += (mouseY - followerY) * 0.1;
+  gsap.set(follower, { x: followerX, y: followerY });
+  requestAnimationFrame(followLoop);
+})();
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => { gsap.to(cursor, { scale: 1.6, duration: 0.3 }); gsap.to(follower, { scale: 1.5, opacity: 0.4, duration: 0.3 }); });
+  el.addEventListener('mouseleave', () => { gsap.to(cursor, { scale: 1, duration: 0.3 }); gsap.to(follower, { scale: 1, opacity: 1, duration: 0.3 }); });
+});
+
+gsap.from('nav', { y: -80, opacity: 0, duration: 1, ease: 'power3.out' });
+document.querySelectorAll('.reveal-up').forEach(el => {
+  gsap.to(el, { scrollTrigger: { trigger: el, start: 'top 90%', once: true }, opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+});
+
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+if (hamburger) hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); });
+window.addEventListener('load', () => setTimeout(() => ScrollTrigger.refresh(), 300));
+</script>
+</body>
+</html>

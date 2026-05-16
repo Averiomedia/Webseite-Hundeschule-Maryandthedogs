@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gruppentraining bei Mary and the Dogs – soziales Lernen in der Gruppe mit Marie Böttiger in Weißenburg." />
+  <title>Gruppentraining | Mary and the Dogs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-hero { padding: 150px 0 70px; background: var(--bg); }
+    .page-hero .section-tag { display: block; margin-bottom: 14px; }
+    .page-hero h1 { font-family: var(--font-serif); font-size: clamp(2.6rem,5vw,4.5rem); color: var(--text); line-height: 1.1; margin-bottom: 16px; }
+    .page-hero .section-lead { max-width: 580px; }
+    .page-hero .gold-line { margin: 20px 0 32px; }
+
+    .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 70px 0; }
+    .course-card { background: #fff; border-radius: 18px; padding: 32px 28px; box-shadow: 0 6px 32px rgba(139,94,60,.1); border: 1px solid rgba(139,94,60,.12); display: flex; flex-direction: column; }
+    .course-card.highlight { background: var(--brown); color: #fff; }
+    .course-tag { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; display: block; }
+    .course-card:not(.highlight) .course-tag { color: var(--brown); }
+    .course-card.highlight .course-tag { color: rgba(255,255,255,.75); }
+    .course-title { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 600; line-height: 1.2; margin-bottom: 12px; }
+    .course-card.highlight .course-title { color: #fff; }
+    .course-desc { font-size: .88rem; line-height: 1.75; flex: 1; margin-bottom: 20px; }
+    .course-card:not(.highlight) .course-desc { color: rgba(30,26,20,.68); }
+    .course-card.highlight .course-desc { color: rgba(255,255,255,.82); }
+    .course-meta { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid rgba(139,94,60,.15); padding-top: 18px; margin-top: auto; }
+    .course-card.highlight .course-meta { border-top-color: rgba(255,255,255,.2); }
+    .course-meta span { font-size: .8rem; display: flex; align-items: center; gap: 8px; }
+    .course-card:not(.highlight) .course-meta span { color: rgba(30,26,20,.6); }
+    .course-card.highlight .course-meta span { color: rgba(255,255,255,.8); }
+    .course-price { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--brown); margin-top: 14px; }
+    .course-card.highlight .course-price { color: #fff; }
+
+    .section-cta { text-align: center; padding: 60px 0; background: var(--surface); }
+    .section-cta h3 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 16px; }
+
+    .page-gallery-strip { display: grid; grid-template-columns: repeat(4, 1fr); height: 52vh; }
+    .page-gallery-item { overflow: hidden; }
+    .page-gallery-item img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform .5s ease; }
+    .page-gallery-item:hover img { transform: scale(1.05); }
+
+    @media (max-width: 900px) { .courses-grid { grid-template-columns: 1fr 1fr; } .page-gallery-strip { grid-template-columns: repeat(2, 1fr); height: 44vh; } }
+    @media (max-width: 600px) { .courses-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="Logo2.png" alt="Mary and the Dogs" class="logo-img" />
+    <span class="logo-text">Mary and the Dogs</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Start</a></li>
+    <li><a href="about.html">Über mich</a></li>
+    <li class="has-dropdown">
+      <a href="index.html#services" class="active">Trainingsangebot</a>
+      <ul class="dropdown">
+        <li><a href="einzeltraining.html">Einzeltraining</a></li>
+        <li><a href="gruppentraining.html">Gruppentraining</a></li>
+        <li><a href="onlinetraining.html">Onlinetraining</a></li>
+        <li><a href="sonderkurse.html">Sonderkurse</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#cta">Kontakt</a></li>
+  </ul>
+  <a href="mailto:info@maryandthedogs.de" class="nav-cta">Training anfragen</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Start</a>
+  <a href="about.html">Über mich</a>
+  <a href="einzeltraining.html">Einzeltraining</a>
+  <a href="gruppentraining.html">Gruppentraining</a>
+  <a href="onlinetraining.html">Onlinetraining</a>
+  <a href="sonderkurse.html">Sonderkurse</a>
+  <a href="index.html#cta">Kontakt</a>
+</div>
+
+<!-- Hero -->
+<section class="page-hero">
+  <div class="container">
+    <span class="section-tag">Trainingsangebot</span>
+    <h1>Gruppentraining</h1>
+    <div class="gold-line"></div>
+    <p class="section-lead">Soziales Lernen in der Gruppe — ideal um Alltagssituationen mit anderen Hunden zu üben und gemeinsam zu wachsen. Alle Kurse finden an vereinbarten Orten statt.</p>
+  </div>
+</section>
+
+<!-- Bildergalerie -->
+<div class="page-gallery-strip">
+  <div class="page-gallery-item"><img src="Bildergalerie/IMG_7137.jpg" alt="Training" /></div>
+  <div class="page-gallery-item"><img src="Bildergalerie/IMG_7067.jpg" alt="Training" /></div>
+  <div class="page-gallery-item"><img src="Bildergalerie/IMG_7173.jpg" alt="Training" /></div>
+  <div class="page-gallery-item"><img src="Bildergalerie/IMG_7159.jpg" alt="Training" /></div>
+</div>
+
+<!-- Hundeplatzstunden -->
+<section style="background: var(--surface)">
+  <div class="container">
+    <div style="padding-top: 60px">
+      <span class="section-tag reveal-up">Hundeplatzstunden &amp; Outdoor</span>
+      <h2 class="section-title animate-title">Für jedes Level<br/>das richtige <em>Kurs</em></h2>
+      <div class="gold-line"></div>
+      <p class="section-lead reveal-up" style="margin-top:16px">Klassische Gruppenstunden an vereinbarten Orten — maximal 6 Teilnehmer pro Gruppe für intensive Betreuung.</p>
+    </div>
+
+    <div class="courses-grid">
+      <div class="course-card reveal-up">
+        <span class="course-tag">Einsteiger</span>
+        <div class="course-title">Weltenentdecker</div>
+        <p class="course-desc">Für Anfänger jeden Alters. Grundlagen wie Sitz, Platz, Bleib, Aus, Stopp, Körbchen und Fuß sowie Rückruf-Basics stehen im Mittelpunkt.</p>
+        <div class="course-meta">
+          <span>👥 Max. 6 Hund-Mensch-Teams</span>
+          <span>⏱ 45–60 Minuten</span>
+        </div>
+        <div class="course-price">25,00 €</div>
+      </div>
+
+      <div class="course-card highlight reveal-up">
+        <span class="course-tag">Fortgeschrittene</span>
+        <div class="course-title">Leinenhelden</div>
+        <p class="course-desc">Für Hunde, die bereits Signale beherrschen. Wir arbeiten an teamspezifischen Übungen und vertiefen das Gelernte in neuen Situationen.</p>
+        <div class="course-meta">
+          <span>👥 Max. 6 Hund-Mensch-Teams</span>
+          <span>⏱ 45–60 Minuten</span>
+        </div>
+        <div class="course-price">25,00 €</div>
+      </div>
+
+      <div class="course-card reveal-up">
+        <span class="course-tag">Profis</span>
+        <div class="course-title">Champions</div>
+        <p class="course-desc">Für fortgeschrittene Teams, die neue Herausforderungen suchen. Wir setzen die Latte höher und fordern euch und euren Hund richtig.</p>
+        <div class="course-meta">
+          <span>👥 Max. 6 Hund-Mensch-Teams</span>
+          <span>⏱ 45–60 Minuten</span>
+        </div>
+        <div class="course-price">25,00 €</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Walks -->
+<section style="background: var(--bg); padding: 20px 0 70px">
+  <div class="container">
+    <div style="padding-top: 60px">
+      <span class="section-tag reveal-up">Draußen unterwegs</span>
+      <h2 class="section-title animate-title">Training &amp; <em>Spaziergänge</em></h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="courses-grid" style="grid-template-columns: 1fr 1fr; max-width: 780px">
+      <div class="course-card reveal-up">
+        <span class="course-tag">Begegnung</span>
+        <div class="course-title">Social-Walk</div>
+        <p class="course-desc">Trainingsspaziergang an der Leine ohne Hundekontakt. Fokus auf Körpersprache bei Begegnungen mit anderen Hunden. Maulkorbträger sind herzlich willkommen.</p>
+        <div class="course-meta">
+          <span>👥 Max. 8 Hund-Mensch-Teams</span>
+          <span>⏱ 60 Minuten</span>
+        </div>
+        <div class="course-price">15,00 €</div>
+      </div>
+
+      <div class="course-card reveal-up">
+        <span class="course-tag">Entspannt</span>
+        <div class="course-title">Walk &amp; Talk</div>
+        <p class="course-desc">Gemeinsamer Spaziergang zum Üben der erlernten Inhalte in entspannter Atmosphäre. Hier darf gern geplaudert werden — Lernen mit Spaß!</p>
+        <div class="course-meta">
+          <span>👥 Max. 10 Hund-Mensch-Teams</span>
+          <span>⏱ 60 Minuten</span>
+        </div>
+        <div class="course-price">5,00 €</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="section-cta">
+  <div class="container reveal-up">
+    <h3>Interesse an einem Kurs?</h3>
+    <p class="section-lead" style="margin: 0 auto 32px">Schreibt mir — ich informiere euch über aktuelle Termine und freie Plätze.</p>
+    <a href="mailto:info@maryandthedogs.de" class="btn-primary">Training anfragen</a>
+  </div>
+</div>
+
+<!-- Weitere Trainingsangebote -->
+<section class="training-nav-strip">
+  <div class="container">
+    <h3>Weitere Trainingsangebote</h3>
+    <div class="gold-line"></div>
+    <div class="training-nav-cards">
+      <a href="einzeltraining.html" class="training-nav-card">
+        <span class="training-nav-card-icon">🎯</span>
+        <div class="training-nav-card-title">Einzeltraining</div>
+        <p class="training-nav-card-desc">Maßgeschneidert für euch — persönlich, intensiv und ganz auf euren Alltag abgestimmt.</p>
+        <span class="training-nav-card-link">Mehr erfahren →</span>
+      </a>
+      <a href="onlinetraining.html" class="training-nav-card">
+        <span class="training-nav-card-icon">💻</span>
+        <div class="training-nav-card-title">Onlinetraining</div>
+        <p class="training-nav-card-desc">Flexibel von zuhause — Einzelstunden, Videoanalysen und Online-Seminare per Zoom oder Google Meet.</p>
+        <span class="training-nav-card-link">Mehr erfahren →</span>
+      </a>
+      <a href="sonderkurse.html" class="training-nav-card">
+        <span class="training-nav-card-icon">🌟</span>
+        <div class="training-nav-card-title">Sonderkurse</div>
+        <p class="training-nav-card-desc">Themenbasierte Kurse zu besonderen Schwerpunkten — saisonal und nach Bedarf.</p>
+        <span class="training-nav-card-link">Mehr erfahren →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:14px">
+          <img src="Logo2.png" alt="Mary and the Dogs" class="logo-img" style="height:44px" />
+        </a>
+        <p>Professionelles Hundetraining mit Herz — in Weißenburg und Umgebung.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="about.html">Über mich</a></li>
+          <li><a href="einzeltraining.html">Einzeltraining</a></li>
+          <li><a href="gruppentraining.html">Gruppentraining</a></li>
+          <li><a href="onlinetraining.html">Onlinetraining</a></li>
+          <li><a href="sonderkurse.html">Sonderkurse</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="agb-datenschutz.html">AGB &amp; Datenschutz</a></li>
+          <li><a href="haftungsausschluss.html">Haftungsausschluss</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mary and the Dogs · Marie Böttiger · Alle Rechte vorbehalten</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis = new Lenis({ lerp: 0.08 });
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursor-follower');
+let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.1, ease: 'none' });
+});
+(function followLoop() {
+  followerX += (mouseX - followerX) * 0.1;
+  followerY += (mouseY - followerY) * 0.1;
+  gsap.set(follower, { x: followerX, y: followerY });
+  requestAnimationFrame(followLoop);
+})();
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => { gsap.to(cursor, { scale: 1.6, duration: 0.3 }); gsap.to(follower, { scale: 1.5, opacity: 0.4, duration: 0.3 }); });
+  el.addEventListener('mouseleave', () => { gsap.to(cursor, { scale: 1, duration: 0.3 }); gsap.to(follower, { scale: 1, opacity: 1, duration: 0.3 }); });
+});
+
+gsap.from('nav', { y: -80, opacity: 0, duration: 1, ease: 'power3.out' });
+document.querySelectorAll('.reveal-up').forEach(el => {
+  gsap.to(el, { scrollTrigger: { trigger: el, start: 'top 90%', once: true }, opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+});
+document.querySelectorAll('.reveal-left').forEach(el => {
+  gsap.to(el, { scrollTrigger: { trigger: el, start: 'top 88%', once: true }, opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' });
+});
+document.querySelectorAll('.reveal-right').forEach(el => {
+  gsap.to(el, { scrollTrigger: { trigger: el, start: 'top 88%', once: true }, opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' });
+});
+
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+if (hamburger) hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); });
+window.addEventListener('load', () => setTimeout(() => ScrollTrigger.refresh(), 300));
+</script>
+</body>
+</html>
