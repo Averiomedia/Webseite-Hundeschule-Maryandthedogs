@@ -21,6 +21,14 @@
   <meta property="og:locale" content="de_DE" />
   <meta property="og:site_name" content="Mary and the Dogs" />
 
+  <!-- Geo-Tags -->
+  <meta name="geo.region" content="DE-BY" />
+  <meta name="geo.placename" content="Weißenburg in Bayern" />
+  <meta name="geo.position" content="49.0337;10.9720" />
+  <meta name="ICBM" content="49.0337, 10.9720" />
+  <meta property="place:location:latitude" content="49.0337" />
+  <meta property="place:location:longitude" content="10.9720" />
+
   <!-- Structured Data: LocalBusiness -->
   <script type="application/ld+json">
   {
@@ -40,7 +48,8 @@
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Weiboldshausenerstr. 3",
-      "addressLocality": "Weißenburg",
+      "addressLocality": "Weißenburg in Bayern",
+      "addressRegion": "Bayern",
       "postalCode": "91781",
       "addressCountry": "DE"
     },
@@ -49,10 +58,18 @@
       "latitude": 49.0337,
       "longitude": 10.9720
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "Weißenburg in Bayern"
-    },
+    "areaServed": [
+      { "@type": "City", "name": "Weißenburg in Bayern" },
+      { "@type": "City", "name": "Gunzenhausen" },
+      { "@type": "City", "name": "Treuchtlingen" },
+      { "@type": "City", "name": "Ellingen" },
+      { "@type": "City", "name": "Pappenheim" },
+      { "@type": "City", "name": "Pleinfeld" },
+      { "@type": "City", "name": "Roth" },
+      { "@type": "City", "name": "Schwabach" },
+      { "@type": "City", "name": "Eichstätt" },
+      { "@type": "GeoCircle", "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 49.0337, "longitude": 10.9720 }, "geoRadius": "30000" }
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Trainingsangebote",
@@ -66,6 +83,17 @@
     "sameAs": [
       "https://www.instagram.com/maryandthedogs",
       "https://www.facebook.com/maryandthedogs"
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Hundeschule Weißenburg", "item": "https://www.maryandthedogs.de/" }
     ]
   }
   </script>
