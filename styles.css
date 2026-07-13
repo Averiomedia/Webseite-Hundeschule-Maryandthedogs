@@ -1504,3 +1504,89 @@ footer {
   .cta-contact { gap: 24px; }
   .phil-cards-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Kontaktformular ──────────────────────────────────────── */
+.contact-form {
+  max-width: 620px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.cf-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.cf-group label {
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+}
+.cf-group input,
+.cf-group select,
+.cf-group textarea {
+  font-family: var(--font-sans);
+  font-size: .92rem;
+  color: var(--text);
+  background: rgba(255,255,255,.75);
+  border: 1.5px solid rgba(139,94,60,.22);
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+}
+.cf-group input:focus,
+.cf-group select:focus,
+.cf-group textarea:focus {
+  border-color: var(--brown);
+  box-shadow: 0 0 0 3px rgba(139,94,60,.12);
+}
+.cf-group textarea { resize: vertical; min-height: 110px; }
+.cf-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.cf-check input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--brown);
+  cursor: pointer;
+}
+.cf-check label {
+  font-size: .83rem;
+  color: rgba(30,26,20,.6);
+  line-height: 1.55;
+  cursor: pointer;
+}
+.cf-check label a { color: var(--brown); text-decoration: none; }
+.cf-check label a:hover { text-decoration: underline; }
+
+/* Honeypot — für Menschen unsichtbar */
+.cf-hp { position: absolute; left: -9999px; visibility: hidden; }
+
+.cf-msg {
+  font-size: .85rem;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+.cf-msg-error { background: rgba(200,50,50,.08); color: #b03030; border: 1px solid rgba(200,50,50,.2); }
+.cf-msg-ok    { background: rgba(107,139,110,.1); color: #3a6b3d; border: 1px solid rgba(107,139,110,.25); }
+
+@media (max-width: 600px) {
+  .cf-row { grid-template-columns: 1fr; }
+}

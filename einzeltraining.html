@@ -246,8 +246,34 @@
 <section style="background: var(--surface)">
   <div class="container section-cta reveal-up">
     <h3>Bereit für euren ersten Termin?</h3>
-    <p class="section-lead" style="margin: 0 auto 32px">Schreibt mir eine Nachricht oder ruft an — ich melde mich schnellstmöglich bei euch.</p>
-    <a href="mailto:info@maryandthedogs.de" class="btn-primary">Training anfragen</a>
+    <p class="section-lead" style="margin: 0 auto 32px">Schreibt mir eine Nachricht — ich melde mich schnellstmöglich bei euch.</p>
+    <form id="contact-form" class="contact-form" novalidate style="max-width:560px">
+      <div class="cf-hp" aria-hidden="true">
+        <label for="cf-hp">Bitte leer lassen</label>
+        <input type="text" id="cf-hp" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <input type="hidden" id="cf-ts" name="ts" />
+      <div class="cf-row">
+        <div class="cf-group">
+          <label for="cf-name">Name *</label>
+          <input type="text" id="cf-name" name="name" placeholder="Dein Name" required />
+        </div>
+        <div class="cf-group">
+          <label for="cf-email">E-Mail *</label>
+          <input type="email" id="cf-email" name="email" placeholder="deine@email.de" required />
+        </div>
+      </div>
+      <div class="cf-group">
+        <label for="cf-message">Nachricht</label>
+        <textarea id="cf-message" name="message" placeholder="Erzähl uns kurz von dir und deinem Hund …" style="min-height:80px"></textarea>
+      </div>
+      <div class="cf-check">
+        <input type="checkbox" id="cf-privacy" required />
+        <label for="cf-privacy">Ich habe die <a href="agb-datenschutz.html">Datenschutzerklärung</a> gelesen und stimme zu.</label>
+      </div>
+      <div id="cf-msg" class="cf-msg" hidden></div>
+      <button type="submit" class="btn-primary">Anfrage abschicken</button>
+    </form>
   </div>
 </section>
 
@@ -355,5 +381,7 @@ const mobileMenu = document.querySelector('.mobile-menu');
 if (hamburger) hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); });
 window.addEventListener('load', () => setTimeout(() => ScrollTrigger.refresh(), 300));
 </script>
+<script src="contact-form.js"></script>
+<script>initContactForm('Einzeltraining');</script>
 </body>
 </html>

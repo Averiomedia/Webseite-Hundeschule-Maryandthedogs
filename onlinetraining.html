@@ -216,7 +216,33 @@
   <div class="container reveal-up">
     <h3>Fragen zum Onlinetraining?</h3>
     <p class="section-lead" style="margin: 0 auto 32px">Meldet euch einfach — ich erkläre euch gern, welches Format am besten zu euch passt.</p>
-    <a href="mailto:info@maryandthedogs.de" class="btn-primary">Training anfragen</a>
+    <form id="contact-form" class="contact-form" novalidate style="max-width:560px">
+      <div class="cf-hp" aria-hidden="true">
+        <label for="cf-hp">Bitte leer lassen</label>
+        <input type="text" id="cf-hp" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <input type="hidden" id="cf-ts" name="ts" />
+      <div class="cf-row">
+        <div class="cf-group">
+          <label for="cf-name">Name *</label>
+          <input type="text" id="cf-name" name="name" placeholder="Dein Name" required />
+        </div>
+        <div class="cf-group">
+          <label for="cf-email">E-Mail *</label>
+          <input type="email" id="cf-email" name="email" placeholder="deine@email.de" required />
+        </div>
+      </div>
+      <div class="cf-group">
+        <label for="cf-message">Nachricht</label>
+        <textarea id="cf-message" name="message" placeholder="Was möchtet ihr besprechen? …" style="min-height:80px"></textarea>
+      </div>
+      <div class="cf-check">
+        <input type="checkbox" id="cf-privacy" required />
+        <label for="cf-privacy">Ich habe die <a href="agb-datenschutz.html">Datenschutzerklärung</a> gelesen und stimme zu.</label>
+      </div>
+      <div id="cf-msg" class="cf-msg" hidden></div>
+      <button type="submit" class="btn-primary">Anfrage abschicken</button>
+    </form>
   </div>
 </div>
 
@@ -318,5 +344,7 @@ const mobileMenu = document.querySelector('.mobile-menu');
 if (hamburger) hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); });
 window.addEventListener('load', () => setTimeout(() => ScrollTrigger.refresh(), 300));
 </script>
+<script src="contact-form.js"></script>
+<script>initContactForm('Onlinetraining');</script>
 </body>
 </html>

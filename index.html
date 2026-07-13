@@ -584,10 +584,56 @@
     <h2 class="section-title animate-title">Starte heute mit deinem Hund.</h2>
     <div class="gold-line" style="margin:24px auto"></div>
     <p class="section-lead reveal-up">Melde dich einfach — ich freue mich auf euch.</p>
-    <div style="margin-top:40px" class="reveal-up">
-      <a href="mailto:info@maryandthedogs.de" class="btn-primary">Training anfragen</a>
-    </div>
-    <div class="cta-contact reveal-up">
+
+    <form id="contact-form" class="contact-form reveal-up" novalidate>
+      <!-- Honeypot -->
+      <div class="cf-hp" aria-hidden="true">
+        <label for="cf-hp">Bitte leer lassen</label>
+        <input type="text" id="cf-hp" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <!-- Zeitstempel -->
+      <input type="hidden" id="cf-ts" name="ts" />
+
+      <div class="cf-row">
+        <div class="cf-group">
+          <label for="cf-name">Name *</label>
+          <input type="text" id="cf-name" name="name" placeholder="Dein Name" required />
+        </div>
+        <div class="cf-group">
+          <label for="cf-email">E-Mail *</label>
+          <input type="email" id="cf-email" name="email" placeholder="deine@email.de" required />
+        </div>
+      </div>
+
+      <div class="cf-group">
+        <label for="cf-training">Trainingsangebot</label>
+        <select id="cf-training" name="training">
+          <option value="">Bitte wählen …</option>
+          <option value="Einzeltraining">Einzeltraining</option>
+          <option value="Gruppentraining">Gruppentraining</option>
+          <option value="Onlinetraining">Onlinetraining</option>
+          <option value="Sonderkurse">Sonderkurse</option>
+        </select>
+      </div>
+
+      <div class="cf-group">
+        <label for="cf-message">Nachricht</label>
+        <textarea id="cf-message" name="message" placeholder="Erzähl uns kurz von dir und deinem Hund …"></textarea>
+      </div>
+
+      <div class="cf-check">
+        <input type="checkbox" id="cf-privacy" required />
+        <label for="cf-privacy">Ich habe die <a href="agb-datenschutz.html">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</label>
+      </div>
+
+      <div id="cf-msg" class="cf-msg" hidden></div>
+
+      <div style="text-align:center">
+        <button type="submit" class="btn-primary">Anfrage abschicken</button>
+      </div>
+    </form>
+
+    <div class="cta-contact reveal-up" style="margin-top:48px">
       <div class="contact-item">
         <span class="label">E-Mail</span>
         <a href="mailto:info@maryandthedogs.de" class="value">info@maryandthedogs.de</a>
@@ -647,5 +693,7 @@
 </footer>
 
 <script src="main.js"></script>
+<script src="contact-form.js"></script>
+<script>initContactForm();</script>
 </body>
 </html>
