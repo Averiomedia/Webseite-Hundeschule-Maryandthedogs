@@ -1397,7 +1397,6 @@ footer {
   overflow: hidden;
   box-shadow: 0 12px 48px rgba(139,94,60,.14);
   background: #fff;
-  max-height: 65vh;
 }
 .maulkorb-img-wrap {
   position: relative;
