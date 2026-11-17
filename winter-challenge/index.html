@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>14 Tage Winter-Hundechallenge</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="manifest" href="/winter-challenge/manifest.json">
+  <meta name="theme-color" content="#8B5E3C">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Hundechallenge">
+  <style>
+    /* ── Fonts (latin only, lokal) ─────────────────────────── */
+    @font-face { font-family:'DM Sans'; font-style:normal; font-weight:300 600; font-display:swap;
+      src:url('../fonts/rP2Hp2ywxg089UriCZOIHQ.woff2') format('woff2');
+      unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family:'Cormorant Garamond'; font-style:normal; font-weight:300 700; font-display:swap;
+      src:url('../fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2') format('woff2');
+      unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family:'Cormorant Garamond'; font-style:italic; font-weight:300 600; font-display:swap;
+      src:url('../fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2') format('woff2');
+      unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+
+    /* ── Reset & Tokens ─────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg:          #FAF8F3;
+      --surface:     #F3EDE2;
+      --surface2:    #EAE0CF;
+      --brown:       #8B5E3C;
+      --brown-light: #B5845A;
+      --sage:        #6B8B6E;
+      --sage-light:  #EAF0EA;
+      --text:        #1E1A14;
+      --text-muted:  #8A7A68;
+      --radius:      16px;
+      --ff-serif:    'Cormorant Garamond', Georgia, serif;
+      --ff-sans:     'DM Sans', system-ui, sans-serif;
+    }
+    body {
+      font-family: var(--ff-sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Setup Overlay ──────────────────────────────────────── */
+    .overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(30,26,20,.5);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .overlay.hidden { display: none; }
+    .setup-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 44px 32px 36px;
+      max-width: 400px; width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 48px rgba(30,26,20,.22);
+    }
+    .setup-logo { height: 56px; width: auto; margin-bottom: 20px; }
+    .setup-card h2 { font-family: var(--ff-serif); font-size: 1.9rem; font-weight: 600; margin-bottom: 8px; }
+    .setup-card p  { color: var(--text-muted); font-size: .9rem; margin-bottom: 28px; line-height: 1.5; }
+    .setup-card label { display: block; text-align: left; font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+    .setup-card input {
+      width: 100%; padding: 14px 16px; border: 1.5px solid rgba(139,94,60,.2);
+      border-radius: 12px; font-family: var(--ff-sans); font-size: 1.1rem;
+      background: var(--bg); color: var(--text); outline: none; margin-bottom: 20px;
+      transition: border-color .2s;
+    }
+    .setup-card input:focus { border-color: var(--brown); }
+    .btn-primary {
+      width: 100%; padding: 15px; min-height: 52px;
+      background: var(--brown); color: #fff; border: none; border-radius: 12px;
+      font-family: var(--ff-sans); font-size: 1rem; font-weight: 500;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-primary:hover, .btn-primary:focus-visible { background: var(--brown-light); }
+    .btn-primary:focus-visible { outline: 3px solid var(--brown); outline-offset: 3px; }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    .ch-header {
+      background: #fff;
+      border-bottom: 1px solid rgba(139,94,60,.12);
+      position: sticky; top: 0; z-index: 10;
+      padding: 12px 16px;
+    }
+    .ch-header-inner { max-width: 680px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+    .ch-logo { height: 44px; width: auto; flex-shrink: 0; }
+    .ch-title { font-family: var(--ff-serif); font-size: 1.1rem; font-weight: 600; line-height: 1.2; }
+    .ch-dog-row { font-size: .82rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
+    .btn-link { background: none; border: none; color: var(--brown); font-size: .78rem; cursor: pointer; padding: 2px 4px; border-radius: 4px; font-family: var(--ff-sans); text-decoration: underline; }
+    .btn-link:focus-visible { outline: 2px solid var(--brown); }
+
+    /* ── Main ───────────────────────────────────────────────── */
+    .ch-main { max-width: 680px; margin: 0 auto; padding: 20px 16px 32px; }
+
+    /* ── Progress Card ──────────────────────────────────────── */
+    .progress-card {
+      background: #fff; border-radius: var(--radius);
+      padding: 20px; margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(139,94,60,.08);
+    }
+    .progress-stats-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; font-size: .88rem; }
+    .progress-pct { font-weight: 600; color: var(--brown); }
+    .progress-track {
+      height: 10px; background: var(--surface2); border-radius: 99px; overflow: hidden; margin-bottom: 12px;
+    }
+    .progress-fill { height: 100%; background: linear-gradient(to right, var(--brown), var(--sage)); border-radius: 99px; transition: width .6s ease; width: 0; }
+    .next-hint { font-size: .88rem; font-weight: 500; color: var(--brown); margin-bottom: 4px; }
+    .motivation { font-size: .85rem; color: var(--text-muted); font-style: italic; }
+
+    /* ── Device Hint ────────────────────────────────────────── */
+    .device-hint {
+      background: var(--surface); border-radius: 10px;
+      padding: 12px 16px; font-size: .82rem; color: var(--text-muted);
+      margin-bottom: 16px; line-height: 1.5;
+    }
+
+    /* ── General Hints ──────────────────────────────────────── */
+    .hints-details { margin-bottom: 20px; }
+    .hints-summary {
+      cursor: pointer; padding: 14px 16px;
+      background: #fff; border-radius: var(--radius);
+      font-weight: 500; font-size: .9rem;
+      box-shadow: 0 1px 4px rgba(139,94,60,.08);
+      list-style: none; display: flex; justify-content: space-between; align-items: center;
+    }
+    .hints-summary::-webkit-details-marker { display: none; }
+    .hints-summary::after { content: '▾'; color: var(--text-muted); font-size: .8rem; transition: transform .2s; }
+    .hints-details[open] .hints-summary::after { transform: rotate(180deg); }
+    .hints-list {
+      background: #fff; border-radius: 0 0 var(--radius) var(--radius);
+      padding: 4px 20px 20px 32px; margin-top: -4px;
+      box-shadow: 0 2px 4px rgba(139,94,60,.06);
+    }
+    .hints-list li { font-size: .88rem; color: var(--text-muted); margin-bottom: 8px; line-height: 1.6; }
+    .hints-list li:last-child { margin-bottom: 0; }
+
+    /* ── Phase Section ──────────────────────────────────────── */
+    .phase-section { margin-bottom: 24px; }
+    .phase-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 10px; padding: 0 2px;
+    }
+    .phase-label {
+      font-size: .68rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+      color: #fff; background: var(--brown); border-radius: 6px; padding: 3px 8px;
+    }
+    .phase-label--bonus { background: var(--sage); }
+    .phase-name { font-family: var(--ff-serif); font-size: 1.1rem; font-weight: 600; color: var(--text); }
+
+    /* ── Day Card ───────────────────────────────────────────── */
+    .day-card {
+      background: #fff; border-radius: var(--radius);
+      border-left: 4px solid transparent;
+      box-shadow: 0 1px 4px rgba(139,94,60,.08);
+      margin-bottom: 10px;
+      transition: border-color .3s;
+    }
+    .day-card.is-next    { border-left-color: var(--brown); }
+    .day-card.is-done-card { border-left-color: var(--sage); }
+
+    .day-summary {
+      cursor: pointer; padding: 16px; list-style: none;
+      display: flex; align-items: center; gap: 10px;
+      user-select: none; min-height: 60px;
+    }
+    .day-summary::-webkit-details-marker { display: none; }
+    .day-badge {
+      flex-shrink: 0; min-width: 54px; text-align: center;
+      font-size: .72rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+      padding: 4px 8px; border-radius: 8px;
+      background: var(--surface2); color: var(--text-muted);
+      transition: background .2s, color .2s;
+    }
+    .day-badge.done { background: var(--sage); color: #fff; }
+    .day-card-title { flex: 1; font-size: .95rem; font-weight: 500; }
+    .done-check { color: var(--sage); font-size: 1rem; flex-shrink: 0; }
+    .expand-icon { color: var(--text-muted); font-size: .8rem; flex-shrink: 0; transition: transform .2s; }
+    .day-card[open] .expand-icon { transform: rotate(180deg); }
+
+    .day-body { padding: 0 16px 20px; border-top: 1px solid rgba(139,94,60,.08); }
+
+    .day-goal {
+      background: var(--surface); border-radius: 10px;
+      padding: 12px 14px; margin: 16px 0 14px;
+      font-size: .88rem; line-height: 1.6;
+    }
+    .day-goal strong { color: var(--brown); }
+
+    .day-instructions { font-size: .88rem; line-height: 1.7; margin-bottom: 18px; }
+    .day-instructions strong { display: block; margin-bottom: 6px; }
+
+    /* Levels */
+    .levels-wrap { margin-bottom: 14px; }
+    .levels-legend { font-size: .78rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; display: block; }
+    .levels-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .level-btn {
+      cursor: pointer;
+      padding: 8px 14px; min-height: 44px;
+      border: 1.5px solid var(--surface2); border-radius: 10px;
+      font-family: var(--ff-sans); font-size: .85rem;
+      background: var(--bg); color: var(--text-muted);
+      transition: all .15s; display: flex; align-items: center;
+    }
+    .level-btn input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .level-btn:has(input:checked),
+    .level-btn.selected {
+      border-color: var(--brown); background: rgba(139,94,60,.08);
+      color: var(--brown); font-weight: 500;
+    }
+    .level-btn:hover { border-color: var(--brown-light); }
+    .level-desc {
+      font-size: .85rem; color: var(--text-muted); background: var(--surface);
+      padding: 10px 12px; border-radius: 8px; line-height: 1.6;
+      min-height: 42px;
+    }
+    .level-desc em { color: var(--text-muted); }
+
+    /* Meta row */
+    .day-meta-row, .day-tip-row {
+      display: flex; gap: 8px; align-items: flex-start;
+      font-size: .85rem; margin-bottom: 8px; line-height: 1.5;
+    }
+    .day-tip-row { color: var(--text-muted); }
+    .day-tip-row strong { color: var(--text); }
+
+    /* Counter */
+    .counter-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 16px 0 12px; gap: 12px;
+    }
+    .counter-label { font-size: .85rem; color: var(--text-muted); }
+    .counter-ctrl { display: flex; align-items: center; gap: 0; }
+    .btn-counter {
+      width: 44px; height: 44px; border: 1.5px solid var(--surface2);
+      background: var(--bg); color: var(--text); font-size: 1.3rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .btn-counter:first-child { border-radius: 10px 0 0 10px; }
+    .btn-counter:last-child  { border-radius: 0 10px 10px 0; }
+    .btn-counter:hover { background: var(--surface); }
+    .btn-counter:focus-visible { outline: 2px solid var(--brown); z-index: 1; }
+    .counter-val {
+      min-width: 48px; height: 44px; border-top: 1.5px solid var(--surface2); border-bottom: 1.5px solid var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 600; background: #fff;
+    }
+
+    /* Done checkbox */
+    .done-label {
+      display: flex; align-items: center; gap: 10px;
+      cursor: pointer; margin: 16px 0 14px;
+      padding: 14px 16px; border-radius: 12px;
+      border: 1.5px solid var(--surface2);
+      font-size: .9rem; font-weight: 500;
+      transition: background .15s, border-color .15s;
+      min-height: 52px;
+    }
+    .done-label:hover { background: var(--surface); }
+    .done-label input { width: 20px; height: 20px; accent-color: var(--sage); cursor: pointer; flex-shrink: 0; }
+    .done-label.checked { background: var(--sage-light); border-color: var(--sage); color: var(--sage); }
+
+    /* Notes */
+    .notes-wrap { margin-top: 2px; }
+    .notes-wrap label { display: block; font-size: .78rem; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .notes-field {
+      width: 100%; min-height: 80px; padding: 12px 14px;
+      border: 1.5px solid var(--surface2); border-radius: 10px;
+      font-family: var(--ff-sans); font-size: .88rem; color: var(--text);
+      background: var(--bg); resize: vertical; outline: none;
+      transition: border-color .2s;
+      line-height: 1.6;
+    }
+    .notes-field:focus { border-color: var(--brown); }
+
+    /* ── Completion Certificate ──────────────────────────────── */
+    .completion {
+      background: #fff; border-radius: 20px;
+      padding: 48px 32px; margin: 24px 0;
+      text-align: center;
+      box-shadow: 0 4px 32px rgba(139,94,60,.14);
+    }
+    .completion.hidden { display: none; }
+    .cert-logo { height: 60px; width: auto; margin-bottom: 20px; }
+    .cert-eyebrow { font-size: 1.2rem; margin-bottom: 12px; }
+    .cert-title { font-family: var(--ff-serif); font-size: 2rem; font-weight: 600; line-height: 1.2; }
+    .cert-have { font-family: var(--ff-serif); font-size: 1.1rem; font-style: italic; color: var(--text-muted); margin: 8px 0; }
+    .cert-challenge-name { font-family: var(--ff-serif); font-size: 1.5rem; font-weight: 600; color: var(--brown); line-height: 1.3; }
+    .cert-date { font-size: .88rem; color: var(--text-muted); margin: 20px 0 8px; }
+    .cert-brand { font-size: .82rem; color: var(--text-muted); letter-spacing: .05em; margin-bottom: 28px; }
+    .btn-print {
+      padding: 13px 28px; min-height: 48px;
+      background: var(--brown); color: #fff; border: none; border-radius: 12px;
+      font-family: var(--ff-sans); font-size: .9rem; font-weight: 500;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-print:hover { background: var(--brown-light); }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    .ch-footer {
+      max-width: 680px; margin: 0 auto;
+      padding: 20px 16px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+      border-top: 1px solid rgba(139,94,60,.1);
+    }
+    .footer-links { font-size: .82rem; color: var(--text-muted); }
+    .footer-links a { color: var(--text-muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--brown); }
+    .btn-reset {
+      background: none; border: 1px solid rgba(139,94,60,.2);
+      color: var(--text-muted); padding: 8px 16px; min-height: 44px;
+      border-radius: 10px; font-family: var(--ff-sans); font-size: .82rem;
+      cursor: pointer; transition: all .15s;
+    }
+    .btn-reset:hover { border-color: #ef4444; color: #ef4444; }
+
+    /* ── Storage Warning ────────────────────────────────────── */
+    .storage-warn {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: #1E1A14; color: #fff; padding: 12px 20px; border-radius: 10px;
+      font-size: .85rem; z-index: 50; white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    }
+    .storage-warn.hidden { display: none; }
+
+    /* ── Print ───────────────────────────────────────────────── */
+    @media print {
+      .ch-header, .progress-card, .device-hint, .hints-details,
+      .phase-section, .ch-footer, .storage-warn, .overlay,
+      .completion .btn-print { display: none !important; }
+      .completion { display: block !important; box-shadow: none; border: 2px solid var(--surface2); }
+      .ch-main { padding: 0; }
+    }
+
+    /* ── Locked card ─────────────────────────────────────────── */
+    .day-card.is-locked { opacity: .55; }
+    .day-card.is-locked .day-summary { cursor: default; }
+    .lock-icon { font-size: .95rem; flex-shrink: 0; }
+    .unlock-hint { font-size: .8rem; color: var(--text-muted); padding: 10px 16px 14px; }
+
+    /* ── Focus ───────────────────────────────────────────────── */
+    :focus-visible { outline: 2px solid var(--brown); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- Dog name setup overlay -->
+  <div id="setup" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Hundename eingeben">
+    <div class="setup-card">
+      <img src="../Logo2.png" alt="Mary and the Dogs" class="setup-logo">
+      <h2>Wie heißt dein Hund?</h2>
+      <p>Der Name wird in Texten und der Urkunde verwendet.<br>Du kannst ihn jederzeit ändern.</p>
+      <form id="setup-form">
+        <label for="dog-name-input">Name deines Hundes</label>
+        <input type="text" id="dog-name-input" maxlength="40" placeholder="z. B. Hati" autocomplete="off" required>
+        <button type="submit" class="btn-primary">Los geht's 🐾</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="ch-header">
+    <div class="ch-header-inner">
+      <img src="../Logo2.png" alt="Mary and the Dogs" class="ch-logo">
+      <div class="ch-header-text">
+        <div class="ch-title">14 Tage Winter-Hundechallenge</div>
+        <div class="ch-dog-row">
+          🐾 Training mit <strong id="dog-name-display">...</strong>
+          <button class="btn-link" id="rename-btn">ändern</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="ch-main">
+
+    <!-- Progress -->
+    <section class="progress-card" aria-label="Dein Fortschritt">
+      <div class="progress-stats-row">
+        <span id="progress-text">0 von 14 Tagen geschafft</span>
+        <span id="progress-pct" class="progress-pct">0 %</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="14" aria-valuenow="0" id="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div id="next-hint" class="next-hint"></div>
+      <div id="motivation"  class="motivation"></div>
+    </section>
+
+    <!-- Device hint -->
+    <div class="device-hint">
+      📱 Dein Fortschritt wird nur auf diesem Gerät gespeichert. Nutze die Seite am besten immer auf demselben Handy und im selben Browser.
+    </div>
+
+    <!-- General hints -->
+    <details class="hints-details">
+      <summary class="hints-summary">Allgemeine Hinweise</summary>
+      <ul class="hints-list">
+        <li>Pro Tag 5–10 Minuten, gern auf 2–3 kurze Einheiten verteilt.</li>
+        <li>Ein Markerwort (z. B. „Top") zeigt dem Hund genau, wann er etwas richtig gemacht hat. Danach kommt die Belohnung.</li>
+        <li>Lieber fünf gute Wiederholungen als dreißig schlechte. Aufhören, wenn es gut läuft.</li>
+        <li>Hat dein Hund einen schlechten Tag, mach Pause. Die Challenge darf auch 16 oder 18 Tage dauern.</li>
+        <li>Bei Schmerzen, Krankheit oder Verhaltensproblemen wie Aggression bitte vorher Rücksprache mit mir.</li>
+      </ul>
+    </details>
+
+    <!-- Day cards (generated by JS) -->
+    <div id="days-container"></div>
+
+    <!-- Completion -->
+    <div id="completion" class="completion hidden" aria-live="polite">
+      <img src="../Logo2.png" alt="Mary and the Dogs" class="cert-logo">
+      <div class="cert-eyebrow">🎉 Herzlichen Glückwunsch!</div>
+      <h2 class="cert-title"><span id="cert-dog"></span> und sein Mensch</h2>
+      <p class="cert-have">haben die</p>
+      <h3 class="cert-challenge-name">14 Tage Winter-Hundechallenge</h3>
+      <p class="cert-have">erfolgreich gemeistert.</p>
+      <div class="cert-date" id="cert-date"></div>
+      <div class="cert-brand">Mary and the Dogs · Hundeschule · Weißenburg</div>
+      <button class="btn-print" onclick="window.print()">Urkunde drucken 🖨</button>
+    </div>
+
+  </main>
+
+  <footer class="ch-footer">
+    <div class="footer-links">
+      <a href="/">Zur Website</a> ·
+      <a href="/#impressum">Impressum</a> ·
+      <a href="/#datenschutz">Datenschutz</a>
+    </div>
+    <button class="btn-reset" id="reset-btn">Fortschritt zurücksetzen</button>
+  </footer>
+
+  <div class="storage-warn hidden" id="storage-warn" role="alert">
+    ⚠️ Fortschritt konnte nicht gespeichert werden (Speicher voll oder blockiert).
+  </div>
+
+<script>
+// ── Challenge-Daten ─────────────────────────────────────────────────────────
+const PHASES = [
+  { id: 1, name: 'Ruhe und Konzentration',    days: [1, 2, 3] },
+  { id: 2, name: 'Köpfchen und Körpergefühl', days: [4, 5, 6, 7] },
+  { id: 3, name: 'Impulskontrolle und Alltag', days: [8, 9, 10, 11] },
+  { id: 4, name: 'Teamwork und Abschluss',    days: [12, 13, 14] },
+];
+
+const DAYS = [
+  { id:1,  title:'Die 2-Minuten-Decke',
+    goal:'Die Decke wird ein Ort, an dem dein Hund zur Ruhe kommt.',
+    instructions:'Leg eine Decke auf den Boden. Belohne jedes Hinschauen, Hingehen und Betreten. Legt sich dein Hund ab, belohne ruhig zwischen seinen Vorderpfoten. Belohne Ruhe, nicht Aktivität.',
+    levels:{ easy:'Dein Hund betritt die Decke.', medium:'Er legt sich hin und bleibt 30 Sekunden liegen.', hard:'Er bleibt 2 Minuten entspannt liegen, während du dich setzt oder kurz aufstehst.' },
+    reps:'5–10 kurze Durchgänge', tip:'Leise loben und langsam füttern – das beruhigt.' },
+
+  { id:2,  title:'Blickkontakt auf Signal',
+    goal:'Dein Hund schaut dich auf ein Signal hin an.',
+    instructions:'Halte ein Leckerli in der Hand und streck den Arm zur Seite. Warte. Sobald dein Hund von der Hand zu deinem Gesicht schaut, markern und belohnen. Klappt das sicher, sag dein Signal (z. B. „Schau") kurz vorher.\n\nKlappt es noch nicht? Wenn dein Hund es gar nicht schafft, sich von der Hand abzuwenden, vereinfachen wir die Übung: Lass das Futter weg, bitte deinen Hund neben dir zu sitzen und markere ihn, sobald er dich ansieht. Anschließend bekommt er ein Leckerli aus der anderen Hand. Danach geht es weiter wie oben beschrieben.',
+    levels:{ easy:'Blickkontakt ohne Signal belohnen.', medium:'Blickkontakt auf Signal, 2 Sekunden halten.', hard:'5 Sekunden Blickkontakt, während die Futterhand seitlich ausgestreckt bleibt.' },
+    reps:'10', tip:'Nicht locken oder Geräusche machen – dein Hund soll den Blick selbst anbieten.' },
+
+  { id:3,  title:'Handtarget',
+    goal:'Dein Hund berührt deine offene Hand mit der Nase.',
+    instructions:'Schritt 1 – Mit Futter: Halte die flache Hand mit einem Leckerli, das du mit dem Daumen festklemmst, wenige Zentimeter neben die Nase deines Hundes. Berührt er die Hand, bekommt er das Leckerli direkt. Mehrmals wiederholen.\n\nSchritt 2 – Ohne Futter: Dasselbe ohne Leckerli in der Hand. Berührt dein Hund die Hand, markern und mit der anderen Hand an der berührten Hand belohnen.\n\nSchritt 3 – Mit Signal: Wenn dein Hund die Übung sicher zeigt, sag kurz vor dem Anbieten der Hand dein Signal (z. B. „Touch").',
+    levels:{ easy:'Hand direkt vor der Nase, mit Leckerli unter dem Daumen.', medium:'Hand in verschiedenen Höhen und Seiten, 30 cm entfernt, ohne Futter in der Hand.', hard:'Dein Hund folgt der Hand ein paar Schritte, bevor er sie berührt – auf Signal.' },
+    reps:'10 pro Seite', tip:'Hand nach jeder Wiederholung kurz wegnehmen und neu anbieten.' },
+
+  { id:4,  title:'Leckerli-Suche',
+    goal:'Nasenarbeit, die müde und zufrieden macht.',
+    instructions:'Versteck 5 Leckerli und gib ein Suchsignal (z. B. „Such"). Lass deinen Hund in Ruhe suchen und hilf nur, wenn er aufgeben will.',
+    levels:{ easy:'Leckerli sichtbar auf dem Boden oder locker in einem Handtuch.', medium:'Leckerli in einem eingerollten Handtuch oder Schnüffelteppich.', hard:'Dein Hund wartet, während du die Leckerli im Raum versteckst.' },
+    reps:'3 Durchgänge', tip:'Langsam steigern – Erfolg ist wichtiger als Schwierigkeit.' },
+
+  { id:5,  title:'Pfotenbewusstsein',
+    goal:'Dein Hund setzt seine Pfoten bewusst ein.',
+    instructions:'Schritt 1: Locke deinen Hund mit einem Leckerli auf die Unterlage. Sobald eine Vorderpfote drauf ist, bekommt er das Leckerli.\n\nSchritt 2: Wenn das gut klappt, bekommt er ab jetzt nur noch eine Belohnung, wenn beide Vorderpfoten auf der Unterlage sind.\n\nSchritt 3: Jetzt ohne Leckerli locken – nur mit der Hand (Luring). Sobald beide Pfoten drauf sind, markern und auf der Unterlage belohnen.\n\nSchritt 4: Wenn Schritt 3 sicher klappt, kann ein Signal dazukommen (z. B. „Target", „Handtuch", „Matte") – kurz vor dem Handzeichen sagen.',
+    levels:{ easy:'Eine Vorderpfote auf der Unterlage, mit Leckerli gelockt.', medium:'Beide Vorderpfoten drauf, Locken nur mit der Hand.', hard:'Beide Vorderpfoten auf Signal, ohne Handzeichen.' },
+    reps:'5–10', tip:'Nicht ziehen, schieben oder die Pfoten hinstellen – dein Hund soll selbst draufgehen.' },
+
+  { id:6,  title:'Der kleine Parcours',
+    goal:'Körpergefühl und Vertrauen auf ungewohntem Untergrund – kombiniert mit bekannten Übungen.',
+    instructions:'Bau aus verschiedenen Unterlagen einen Parcours, z. B. Zeitung, Handtuch und Wäschekorb (umgedreht als Plattform).\n\nStation 1 (z. B. Zeitung): Locke deinen Hund mit einem Leckerli drauf und frage ein Sitz ab. Wiederhole so lange, bis er sich automatisch hinsetzt – erst dann belohnen.\n\nStation 2 (z. B. Handtuch): Wenn Station 1 klappt, kommt Station 2 dazu. Hier soll dein Hund das Handtarget von Tag 3 zeigen (Nase an deine Hand stupsen).\n\nStation 3 (z. B. Wäschekorb): Wenn die ersten beiden Stationen gut laufen, kommt die dritte dazu. Hier soll dein Hund Platz machen.\n\nZiel: Erst zur 1. Station + Sitz, dann 2. Station + Touch, dann 3. Station + Platz – danach wird belohnt.',
+    levels:{ easy:'Station 1 allein: auf die Unterlage und Sitz – mit Leckerli gelockt.', medium:'Stationen 1 und 2 hintereinander, Belohnung erst am Ende.', hard:'Alle 3 Stationen als Kette: Sitz + Touch + Platz, Belohnung nur am Schluss.' },
+    reps:'3 Durchgänge', tip:'Jede Station zuerst einzeln üben, bevor du sie zur Kette verbindest.' },
+
+  { id:7,  title:'Spielzeug bringen',
+    goal:'Dein Hund nimmt einen Gegenstand auf und legt ihn gezielt ab.',
+    instructions:'Schritt 1 – Nehmen: Biete ein Lieblingsspielzeug an. Nimmt dein Hund es ins Maul, sofort markern und gegen ein Leckerli tauschen. Mehrmals wiederholen.\n\nSchritt 2 – Bringen: Wirf das Spielzeug einen Meter weit. Hebt er es auf und kommt zu dir, markern und tauschen. Klappt das, Distanz langsam vergrößern.\n\nSchritt 3 – In die Hand: Halte deine geöffnete Hand unter das Spielzeug, das er im Maul hält. Lässt er es rein, sofort markern und mit einem Leckerli belohnen.\n\nSchritt 4 – In eine Kiste: Stelle eine Kiste oder einen Eimer direkt neben dich. Wenn dein Hund zuverlässig in deine Hand abgibt, verschiebe die Hand knapp über die Kiste. Öffnet er das Maul über der Kiste, fällt der Gegenstand rein – sofort groß markern und belohnen. Distanz zur Kiste danach langsam vergrößern.',
+    levels:{ easy:'Dein Hund nimmt das Spielzeug ins Maul und lässt es auf Signal wieder los.', medium:'Er bringt es aus 1–2 Metern und gibt es in deine Hand ab.', hard:'Er holt den Gegenstand und legt ihn gezielt in eine Kiste.' },
+    reps:'5 erfolgreiche Wiederholungen', tip:'Nicht am Spielzeug ziehen – tauschen statt wegnehmen.' },
+
+  { id:8,  title:'Warten auf Freigabe',
+    goal:'Dein Hund wartet kurz, bevor er sich etwas nimmt.',
+    instructions:'Halte ein Leckerli in der geschlossenen Faust. Dein Hund darf schnüffeln. Lässt er ab, gibst du dein Freigabesignal (z. B. „Nimm") und er bekommt das Leckerli.',
+    levels:{ easy:'Geschlossene Faust.', medium:'Offene Hand, 3 Sekunden warten.', hard:'Futternapf abstellen, 5–10 Sekunden warten bis zur Freigabe.' },
+    reps:'10', tip:'Nicht unnötig lange warten lassen – Erfolg macht Lust auf mehr.' },
+
+  { id:9,  title:'Die Tür-Challenge',
+    goal:'Ruhe an der Haustür.',
+    instructions:'Dein Hund sitzt oder steht ruhig neben dir. Fass die Türklinke an. Bleibt er ruhig, markern und belohnen. Stürmt er nach vorn, Tür sofort wieder schließen.',
+    levels:{ easy:'Hand an die Klinke.', medium:'Tür einen Spalt öffnen und wieder schließen.', hard:'Tür ganz öffnen, Hund bleibt bis zur Freigabe.' },
+    reps:'5–10', tip:'An Straßen immer mit Leine oder Türgitter absichern.' },
+
+  { id:10, title:'Seitenwechsel',
+    goal:'Dein Hund wechselt auf Signal hinter dir die Seite.',
+    instructions:'Schritt 1 – Mit Leckerli lotsen: Dein Hund steht neben dir (egal auf welcher Seite). Nimm ein Leckerli in die Hand, die auf seiner Seite ist, und führe ihn damit langsam hinter deinem Rücken zur anderen Seite. Sobald er dort angekommen ist, belohnen.\n\nSchritt 2 – Handzeichen statt Futter: Dasselbe, aber ohne Leckerli in der Lotshand. Du führst ihn mit einem leeren Handzeichen – das Leckerli kommt erst, wenn er auf der anderen Seite ankommt.\n\nSchritt 3 – Signal dazu: Wenn das Handzeichen sicher klappt, sag kurz vorher dein Signal (z. B. „Seite" oder „Wechsel").\n\nSchritt 4 – Im Gehen: Übe den Seitenwechsel, während du langsam gehst statt stehst.',
+    levels:{ easy:'Im Stand, mit Leckerli in der Lotshand hinter dem Rücken.', medium:'Im Stand, nur mit Handzeichen und Signal – Leckerli erst auf der anderen Seite.', hard:'Im Gehen, auf Signal, ohne Handzeichen.' },
+    reps:'5–8 pro Richtung', tip:'Langsam bewegen – dein Hund braucht Zeit, dem Handzeichen zu folgen.' },
+
+  { id:11, title:'Stopp',
+    goal:'Dein Hund setzt sich automatisch neben dich, wenn du anhältst – ganz ohne Signal.',
+    instructions:'Schritt 1 – Aufbau: Geh mit deinem Hund nebeneinander ein paar Schritte. Bleib stehen. Locke deinen Hund mit einem Leckerli ins Sitz direkt neben dich. Markern und belohnen. Mehrmals wiederholen.\n\nSchritt 2 – Automatisch: Geh wieder ein paar Schritte und bleib stehen. Wartet kurz. Setzt sich dein Hund von selbst neben dich, sofort markern und groß belohnen. Passiert nichts: zurück zu Schritt 1.\n\nSchritt 3 – Position prüfen: Sitzt er, aber deutlich zu weit vorne? Locke ihn mit einem Leckerli wieder neben dich in die richtige Position – aber belohne noch nicht. Wiederholen, bis er von selbst an der richtigen Stelle sitzt, dann belohnen.',
+    levels:{ easy:'Geh 3 Schritte, bleib stehen – Hund ins Sitz locken.', medium:'Geh 5–8 Schritte, bleib stehen – Hund setzt sich selbst neben dich.', hard:'Unterschiedliche Tempi und Richtungswechsel, Hund setzt sich immer korrekt neben dich.' },
+    reps:'5–8', tip:'Nicht sagen – dein Hund soll das Stehenbleiben selbst als Signal lesen lernen.' },
+
+  { id:12, title:'Rückruf im Haus',
+    goal:'Dein Hund kommt auf einmaliges Rufen freudig zu dir.',
+    instructions:'Ruf deinen Hund einmal freundlich. Kommt er, gibt es eine besonders gute Belohnung. Nicht mehrfach rufen.',
+    levels:{ easy:'Im selben Raum, 2 Meter entfernt.', medium:'Aus einem anderen Raum.', hard:'Während er schnüffelt oder kaut.' },
+    reps:'5–10', tip:'Nie rufen, um danach etwas Unangenehmes zu machen.' },
+
+  { id:13, title:'Kleine Ablenkung',
+    goal:'Bekannte Übungen klappen auch, wenn sich etwas verändert.',
+    instructions:'Übe eine bekannte Aufgabe (Decke, Blickkontakt, Handtarget), während du etwas veränderst.',
+    levels:{ easy:'Du machst einen Schritt zurück.', medium:'Du gehst im Kreis oder klatschst leise.', hard:'Ein Spielzeug liegt 1 Meter entfernt auf dem Boden.' },
+    reps:'5–10', tip:'Nur so viel Ablenkung, dass es noch gelingt.' },
+
+  { id:14, title:'Die große Team-Challenge',
+    goal:'Drei Übungen zu einer Abfolge verbinden.',
+    instructions:'Handtarget → auf die Decke schicken → auf Freigabe zu dir kommen.',
+    levels:{ easy:'Jede Übung einzeln, Belohnung nach jeder.', medium:'Zwei Übungen hintereinander, dann Belohnung.', hard:'Die ganze Abfolge am Stück, Belohnung am Ende.' },
+    reps:'3 komplette Durchgänge', tip:'Danach gemeinsam feiern – ihr habt es geschafft!' },
+];
+
+// ── Bonus-Übungen (zählen nicht zur Challenge) ──────────────────────────────
+const BONUS = [
+  { id:15, title:'Taschentuch holen',
+    goal:'Dein Hund öffnet selbstständig einen Schrank, holt eine Taschentuchpackung heraus, bringt sie dir in die Hand und schließt den Schrank wieder – alles auf das Signal „Taschentuch".',
+    instructions:`<strong>Schritt 1 – Schrank öffnen:</strong> Häng ein altes Tuch an einen Schrank oder eine Schublade. Mach das Tuch interessant. Jede Interaktion damit wird sofort belohnt – schnüffeln, berühren, ins Maul nehmen, daran ziehen. Steigere dich langsam: erst jede Berührung, dann nur Ziehen, dann nur vollständiges Öffnen. Wenn er die Tür sicher öffnet, kannst du das benennen (z. B. „Öffnen" oder „Tür").<br><br>
+
+<strong>Schritt 2 – Gegenstand nehmen und bringen:</strong> Du öffnest die Tür selbst und legst die Taschentücher hinein. Jede Interaktion mit den Taschentüchern wird belohnt – schnüffeln, berühren, anfassen. Wenn er verstanden hat, dass er sie herausholen soll, wird nur noch das Herausnehmen belohnt. Hältst du dann deine Hand hin, bekommt er eine Belohnung dafür, dass er sie dir gibt. Ab diesem Moment wird nur noch das Abgeben in die Hand belohnt. Jetzt kannst du es benennen: „Taschentuch".<br><br>
+
+<strong>Schritt 3 – Tür schließen:</strong> Du öffnest die Tür. Dein Hund soll in der Nähe sein. Jede Interaktion mit der Tür wird belohnt – anstupsen, schubsen, mit der Pfote antippen. Steigere dich, bis er die Tür vollständig schließt. Ab dann wird nur noch das vollständige Schließen belohnt. Benennen: z. B. „Schließen" oder „Close".<br><br>
+
+<strong>Schritt 4 – Zusammensetzen:</strong> Steh an der Tür und gib die drei Signale nacheinander: „Öffnen" → „Taschentuch" → „Schließen". Wiederhole, bis er die Abfolge sicher kennt.<br><br>
+
+<strong>Schritt 5 – Nur noch ein Signal:</strong> Sage nur noch „Taschentuch". Dein Hund soll selbst auf die Idee kommen: Tür öffnen → Taschentuch herausholen und dir bringen → Tür schließen. Du darfst ihn am Anfang noch mit Blicken oder Gesten leicht unterstützen – aber immer weniger.<br><br>
+
+<strong>Steigerung:</strong> Du stehst nicht mehr direkt an der Tür, sondern etwas weiter weg. Dein Hund muss jetzt: zur Tür gehen und öffnen → dir das Taschentuch bringen → zurück zur Tür und schließen.`,
+    levels:{ easy:'Schritt 1 + 2 getrennt üben – Tür öffnen und Gegenstand holen je einzeln.', medium:'Alle 3 Schritte mit je eigenem Signal hintereinander.', hard:'Nur Signal „Taschentuch" – Hund führt die gesamte Abfolge selbstständig durch.' },
+    reps:'2–3 Durchgänge pro Einheit', tip:'Jeder Schritt muss sicher sitzen, bevor du ihn mit dem nächsten verbindest. Lieber 3 Einheiten pro Schritt als zu früh weiterzugehen.' },
+];
+
+// ── Alle Tage in Reihenfolge (für Sperr-Logik) ──────────────────────────────
+const ALL_DAYS = [...DAYS, ...BONUS];
+
+// ── State ───────────────────────────────────────────────────────────────────
+function getCode() {
+  const m = document.cookie.match(/(?:^|;\s*)ch_code=([^;]+)/);
+  return m ? decodeURIComponent(m[1]) : 'default';
+}
+
+const STORE_KEY = 'winterchallenge:' + getCode();
+
+function loadState() {
+  try { const r = localStorage.getItem(STORE_KEY); return r ? JSON.parse(r) : null; }
+  catch { return null; }
+}
+
+function saveState(s) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); }
+  catch { showStorageWarn(); }
+}
+
+function defaultState() {
+  const days = {};
+  DAYS.forEach(d => { days[d.id] = { done: false, doneDate: null, level: '', count: 0, notes: '' }; });
+  BONUS.forEach(d => { days[d.id] = { done: false, doneDate: null, level: '', count: 0, notes: '' }; });
+  return { v: 1, dogName: '', days };
+}
+
+let S = loadState() || defaultState();
+
+// ── Tages-Sperre ────────────────────────────────────────────────────────────
+function today() { return new Date().toISOString().split('T')[0]; }
+
+function isUnlocked(dayId) {
+  const idx = ALL_DAYS.findIndex(d => d.id === dayId);
+  if (idx <= 0) return true; // erster Tag immer frei
+  const prevId    = ALL_DAYS[idx - 1].id;
+  const prevState = S.days[prevId];
+  if (!prevState?.done || !prevState?.doneDate) return false;
+  return prevState.doneDate < today(); // gestern oder früher abgehakt
+}
+
+function unlockDateFor(dayId) {
+  const idx = ALL_DAYS.findIndex(d => d.id === dayId);
+  if (idx <= 0) return null;
+  const prevId    = ALL_DAYS[idx - 1].id;
+  const prevState = S.days[prevId];
+  if (!prevState?.done || !prevState?.doneDate) return null;
+  const d = new Date(prevState.doneDate);
+  d.setDate(d.getDate() + 1);
+  return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long' });
+}
+
+// ── Motivation ──────────────────────────────────────────────────────────────
+function getMotivation(pct) {
+  if (pct === 0)  return 'Bereit für euer Winter-Abenteuer? Viel Freude dabei! 🐾';
+  if (pct <= 25)  return 'Ein guter Start! Ihr findet euren Rhythmus.';
+  if (pct <= 50)  return 'Halbzeit – ihr seid ein tolles Team!';
+  if (pct <= 75)  return 'Mehr als die Hälfte geschafft – weiter so!';
+  if (pct < 100)  return 'Fast am Ziel! Noch ein paar Tage.';
+  return 'Ihr habt es geschafft! 🎉';
+}
+
+// ── Progress ────────────────────────────────────────────────────────────────
+function renderProgress() {
+  const done  = DAYS.filter(d => S.days[d.id]?.done).length;
+  const total = DAYS.length;
+  const pct   = Math.round((done / total) * 100);
+
+  document.getElementById('progress-text').textContent = done + ' von ' + total + ' Tagen geschafft';
+  document.getElementById('progress-pct').textContent  = pct + ' %';
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-bar').setAttribute('aria-valuenow', done);
+  document.getElementById('motivation').textContent    = getMotivation(pct);
+
+  const nextDay = DAYS.find(d => !S.days[d.id]?.done);
+  const hint    = document.getElementById('next-hint');
+  if (done === total) {
+    hint.textContent = '🎉 Alle 14 Tage geschafft!';
+    document.getElementById('completion').classList.remove('hidden');
+    document.getElementById('cert-dog').textContent  = S.dogName;
+    document.getElementById('cert-date').textContent = 'Abgeschlossen am ' + new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+  } else if (nextDay) {
+    hint.textContent = 'Heute dran: Tag ' + nextDay.id + ' · ' + nextDay.title;
+  }
+}
+
+// ── Build day card HTML ──────────────────────────────────────────────────────
+function buildCard(day) {
+  const locked  = !isUnlocked(day.id);
+  const ds      = S.days[day.id];
+  const isDone  = ds?.done || false;
+  const lv      = ds?.level || '';
+  const count   = ds?.count || 0;
+  const notes   = (ds?.notes || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  if (locked) {
+    const unlockDate = unlockDateFor(day.id);
+    const hint = unlockDate
+      ? `Verfügbar ab ${unlockDate}`
+      : `Erledige zuerst Tag ${ALL_DAYS[ALL_DAYS.findIndex(d => d.id === day.id) - 1].id}`;
+    return `
+<div class="day-card is-locked" id="day-${day.id}">
+  <div class="day-summary">
+    <span class="day-badge">Tag ${day.id}</span>
+    <span class="day-card-title">${day.title}</span>
+    <span class="lock-icon" aria-label="Gesperrt">🔒</span>
+  </div>
+  <div class="unlock-hint">${hint}</div>
+</div>`;
+  }
+
+  const levelOpts = ['easy','medium','hard'].map((v,i) => {
+    const labels = ['Leicht','Mittel','Anspruchsvoll'];
+    const sel    = lv === v ? 'selected' : '';
+    return `<label class="level-btn ${sel}"><input type="radio" name="lv${day.id}" value="${v}"${lv===v?' checked':''}><span>${labels[i]}</span></label>`;
+  }).join('');
+
+  const descText = lv ? day.levels[lv] : '<em>Wähle eine Stufe, um den passenden Hinweis zu sehen.</em>';
+
+  return `
+<details class="day-card${isDone?' is-done-card':''}" id="day-${day.id}">
+  <summary class="day-summary">
+    <span class="day-badge${isDone?' done':''}">Tag ${day.id}</span>
+    <span class="day-card-title">${day.title}</span>
+    ${isDone ? '<span class="done-check" aria-label="Erledigt">✓</span>' : ''}
+    <span class="expand-icon" aria-hidden="true">▾</span>
+  </summary>
+  <div class="day-body">
+    <p class="day-goal"><strong>Ziel:</strong> ${day.goal}</p>
+
+    <div class="day-instructions"><strong>So geht's:</strong><p>${day.instructions.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}</p></div>
+
+    <div class="levels-wrap">
+      <span class="levels-legend">Deine Stufe</span>
+      <div class="levels-row" id="lvrow-${day.id}">${levelOpts}</div>
+      <div class="level-desc" id="lvdesc-${day.id}">${descText}</div>
+    </div>
+
+    <div class="day-meta-row">🔁 <span><strong>Wiederholungen:</strong> ${day.reps}</span></div>
+    <div class="day-tip-row">💡 <span>${day.tip}</span></div>
+
+    <div class="counter-row">
+      <span class="counter-label">Wiederholungen heute:</span>
+      <div class="counter-ctrl">
+        <button class="btn-counter" data-day="${day.id}" data-action="minus" aria-label="Weniger">−</button>
+        <span class="counter-val" id="cnt-${day.id}">${count}</span>
+        <button class="btn-counter" data-day="${day.id}" data-action="plus"  aria-label="Mehr">+</button>
+      </div>
+    </div>
+
+    <label class="done-label${isDone?' checked':''}">
+      <input type="checkbox" data-day="${day.id}" class="done-cb"${isDone?' checked':''}>
+      <span>Aufgabe erledigt ✓</span>
+    </label>
+
+    <div class="notes-wrap">
+      <label for="notes-${day.id}">Was hat gut geklappt? Was war schwierig?</label>
+      <textarea id="notes-${day.id}" class="notes-field" data-day="${day.id}"
+        placeholder="Deine Notizen für heute ...">${notes}</textarea>
+    </div>
+  </div>
+</details>`;
+}
+
+// ── Render all days ─────────────────────────────────────────────────────────
+function renderDays() {
+  const container = document.getElementById('days-container');
+  let html = '';
+
+  PHASES.forEach(ph => {
+    html += `<section class="phase-section">
+      <div class="phase-header">
+        <span class="phase-label">Phase ${ph.id}</span>
+        <span class="phase-name">${ph.name}</span>
+      </div>`;
+    ph.days.forEach(id => { html += buildCard(DAYS.find(d => d.id === id)); });
+    html += '</section>';
+  });
+
+  // Bonus section
+  html += `<section class="phase-section bonus-section">
+    <div class="phase-header">
+      <span class="phase-label phase-label--bonus">Bonus</span>
+      <span class="phase-name">Freiwillige Übung 🌟</span>
+    </div>
+    <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:12px;padding:0 2px;">Diese Übung ist nicht Teil der 14-Tage-Challenge – für alle, die mehr wollen.</p>`;
+  BONUS.forEach(d => { html += buildCard(d); });
+  html += '</section>';
+
+  container.innerHTML = html;
+
+  // Mark next undone day
+  const nextDay = DAYS.find(d => !S.days[d.id]?.done);
+  if (nextDay) {
+    const el = document.getElementById('day-' + nextDay.id);
+    if (el) { el.classList.add('is-next'); el.open = true; }
+  }
+
+  // Attach events to all cards
+  [...DAYS, ...BONUS].forEach(d => attachCardEvents(d.id));
+}
+
+// ── Card events ─────────────────────────────────────────────────────────────
+function attachCardEvents(id) {
+  // Level radios
+  document.querySelectorAll(`input[name="lv${id}"]`).forEach(radio => {
+    radio.addEventListener('change', () => {
+      S.days[id].level = radio.value;
+      saveState(S);
+      document.getElementById('lvdesc-' + id).innerHTML = DAYS.find(d => d.id === id).levels[radio.value];
+      document.querySelectorAll(`#lvrow-${id} .level-btn`).forEach(l => l.classList.remove('selected'));
+      radio.closest('.level-btn').classList.add('selected');
+    });
+  });
+
+  // Counter
+  document.querySelectorAll(`.btn-counter[data-day="${id}"]`).forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cur = S.days[id].count || 0;
+      S.days[id].count = btn.dataset.action === 'plus' ? cur + 1 : Math.max(0, cur - 1);
+      saveState(S);
+      document.getElementById('cnt-' + id).textContent = S.days[id].count;
+    });
+  });
+
+  // Done checkbox
+  const cb = document.querySelector(`.done-cb[data-day="${id}"]`);
+  if (cb) {
+    cb.addEventListener('change', () => {
+      S.days[id].done     = cb.checked;
+      S.days[id].doneDate = cb.checked ? new Date().toISOString().split('T')[0] : null;
+      saveState(S);
+
+      const card  = document.getElementById('day-' + id);
+      const badge = card.querySelector('.day-badge');
+      const label = card.querySelector('.done-label');
+
+      card.classList.toggle('is-done-card', cb.checked);
+      card.classList.toggle('is-next', false);
+      badge.classList.toggle('done', cb.checked);
+      label.classList.toggle('checked', cb.checked);
+
+      // Update done check icon
+      const existing = card.querySelector('.done-check');
+      if (cb.checked && !existing) {
+        const s = document.createElement('span');
+        s.className = 'done-check'; s.setAttribute('aria-label', 'Erledigt'); s.textContent = '✓';
+        card.querySelector('.day-summary').insertBefore(s, card.querySelector('.expand-icon'));
+      } else if (!cb.checked && existing) {
+        existing.remove();
+      }
+
+      renderProgress();
+      // Re-render all days so the next card switches from locked→unlocked (or vice versa)
+      renderDays();
+    });
+  }
+
+  // Notes (debounced)
+  const notesEl = document.getElementById('notes-' + id);
+  if (notesEl) {
+    let t;
+    notesEl.addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(() => { S.days[id].notes = notesEl.value; saveState(S); }, 400);
+    });
+  }
+}
+
+// ── Dog name ────────────────────────────────────────────────────────────────
+function updateDogDisplay() {
+  document.getElementById('dog-name-display').textContent = S.dogName || '…';
+}
+
+function showSetup() {
+  document.getElementById('setup').classList.remove('hidden');
+  setTimeout(() => document.getElementById('dog-name-input').focus(), 50);
+}
+
+function hideSetup() {
+  document.getElementById('setup').classList.add('hidden');
+}
+
+document.getElementById('setup-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('dog-name-input').value.trim();
+  if (!name) return;
+  S.dogName = name;
+  saveState(S);
+  updateDogDisplay();
+  hideSetup();
+});
+
+document.getElementById('rename-btn').addEventListener('click', () => {
+  document.getElementById('dog-name-input').value = S.dogName;
+  showSetup();
+});
+
+// ── Storage warning ──────────────────────────────────────────────────────────
+let warnTimer;
+function showStorageWarn() {
+  const el = document.getElementById('storage-warn');
+  el.classList.remove('hidden');
+  clearTimeout(warnTimer);
+  warnTimer = setTimeout(() => el.classList.add('hidden'), 4000);
+}
+
+// ── Reset ────────────────────────────────────────────────────────────────────
+document.getElementById('reset-btn').addEventListener('click', () => {
+  if (!confirm('Willst du deinen gesamten Fortschritt wirklich löschen? Das kann nicht rückgängig gemacht werden.')) return;
+  const name = S.dogName;
+  S = defaultState();
+  S.dogName = name;
+  saveState(S);
+  renderDays();
+  renderProgress();
+  document.getElementById('completion').classList.add('hidden');
+});
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+updateDogDisplay();
+renderDays();
+renderProgress();
+if (!S.dogName) showSetup();
+</script>
+</body>
+</html>

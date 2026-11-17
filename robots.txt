@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 
 Disallow: /backup_maryandthedogs_original.html
+Disallow: /winter-challenge/
+Disallow: /winter-challenge
 
 Sitemap: https://www.maryandthedogs.de/sitemap.xml

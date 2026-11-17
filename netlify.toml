@@ -1,0 +1,19 @@
+[build]
+  publish = "."
+
+[[edge_functions]]
+  path = "/winter-challenge/*"
+  function = "challenge-auth"
+
+[[redirects]]
+  from   = "/winter-challenge"
+  to     = "/winter-challenge/"
+  status = 301
+
+[[headers]]
+  for = "/winter-challenge/*"
+  [headers.values]
+    X-Robots-Tag           = "noindex, nofollow"
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
