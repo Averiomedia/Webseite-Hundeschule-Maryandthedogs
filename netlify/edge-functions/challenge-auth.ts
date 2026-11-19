@@ -189,7 +189,7 @@ export default async function handler(req: Request, context: Context): Promise<R
     }
     const expires   = Math.floor(Date.now() / 1000) + VIDEO_EXPIRY;
     const tokenHash = await sha256hex(bunnyKey + videoId + expires);
-    const iframeUrl = `https://iframe.mediadelivery.net/embed/${bunnyLib}/${videoId}?token=${tokenHash}&expires=${expires}&autoplay=false`;
+    const iframeUrl = `https://player.mediadelivery.net/embed/${bunnyLib}/${videoId}?token=${tokenHash}&expires=${expires}&autoplay=false&responsive=true`;
     return new Response(JSON.stringify({ url: iframeUrl }), {
       headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
     });
