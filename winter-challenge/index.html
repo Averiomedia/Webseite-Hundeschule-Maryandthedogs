@@ -825,6 +825,18 @@ function renderDays() {
 
 // ── Card events ─────────────────────────────────────────────────────────────
 function attachCardEvents(id) {
+  // Video für aktuell gewählte Stufe (oder 'easy' als Default) laden
+  function updateVideo(level) {
+    const videoWrap = document.getElementById('video-' + id);
+    if (!videoWrap) return;
+    videoWrap.innerHTML = '<p class="video-loading">Video wird geladen …</p>';
+    loadVideo(id, level).then(url => {
+      videoWrap.innerHTML = url
+        ? `<div class="video-wrap"><iframe src="${url}" allowfullscreen loading="lazy" allow="autoplay"></iframe></div>`
+        : '';
+    });
+  }
+
   // Level radios
   document.querySelectorAll(`input[name="lv${id}"]`).forEach(radio => {
     radio.addEventListener('change', () => {
@@ -834,20 +846,19 @@ function attachCardEvents(id) {
       document.getElementById('lvdesc-' + id).innerHTML = dayData.levels[radio.value];
       document.querySelectorAll(`#lvrow-${id} .level-btn`).forEach(l => l.classList.remove('selected'));
       radio.closest('.level-btn').classList.add('selected');
-      // Video laden
-      const videoWrap = document.getElementById('video-' + id);
-      if (videoWrap) {
-        videoWrap.innerHTML = '<p class="video-loading">Video wird geladen …</p>';
-        loadVideo(id, radio.value).then(url => {
-          if (url) {
-            videoWrap.innerHTML = `<div class="video-wrap"><iframe src="${url}" allowfullscreen loading="lazy" allow="autoplay"></iframe></div>`;
-          } else {
-            videoWrap.innerHTML = '';
-          }
-        });
-      }
+      updateVideo(radio.value);
     });
   });
+
+  // Video beim Aufklappen laden (gespeicherte Stufe oder 'easy' als Default)
+  const detailsEl = document.getElementById('day-' + id);
+  if (detailsEl && detailsEl.tagName === 'DETAILS') {
+    detailsEl.addEventListener('toggle', () => {
+      if (detailsEl.open) updateVideo(S.days[id]?.level || 'easy');
+    });
+    // Falls die Karte beim Render bereits offen ist (nächster Tag)
+    if (detailsEl.open) updateVideo(S.days[id]?.level || 'easy');
+  }
 
   // Counter
   document.querySelectorAll(`.btn-counter[data-day="${id}"]`).forEach(btn => {
