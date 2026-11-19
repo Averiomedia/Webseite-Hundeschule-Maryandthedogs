@@ -347,11 +347,39 @@
     .lock-icon { font-size: .95rem; flex-shrink: 0; }
     .unlock-hint { font-size: .8rem; color: var(--text-muted); padding: 10px 16px 14px; }
 
+    /* ── Admin bar ───────────────────────────────────────────── */
+    .admin-bar {
+      background: #1E1A14; color: #fff; padding: 10px 16px;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      font-size: .82rem; position: sticky; top: 0; z-index: 20;
+    }
+    .admin-bar.hidden { display: none; }
+    .admin-badge { background: #ef4444; color: #fff; padding: 2px 8px; border-radius: 6px; font-weight: 600; font-size: .72rem; letter-spacing: .08em; }
+    .admin-bar label { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.8); }
+    .admin-bar input[type=range] { width: 120px; accent-color: var(--brown); }
+    .admin-day-val { font-weight: 600; min-width: 20px; }
+    .admin-bar .btn-link { color: rgba(255,255,255,.6); font-size: .78rem; }
+
+    /* ── Video ───────────────────────────────────────────────── */
+    .video-wrap { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; background: #000; }
+    .video-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .video-loading { font-size: .82rem; color: var(--text-muted); padding: 8px 0; }
+
     /* ── Focus ───────────────────────────────────────────────── */
     :focus-visible { outline: 2px solid var(--brown); outline-offset: 2px; }
   </style>
 </head>
 <body>
+
+  <!-- Admin bar (nur für CHALLENGE_ADMIN_CODE) -->
+  <div id="admin-bar" class="admin-bar hidden" role="banner">
+    <span class="admin-badge">🛠 ADMIN</span>
+    <label>Als Kunde ansehen am Challenge-Tag
+      <input type="range" id="admin-sim-day" min="1" max="15" value="1">
+      <span class="admin-day-val" id="admin-day-val">1</span>
+    </label>
+    <button class="btn-link" id="admin-all-btn">Alle freischalten</button>
+  </div>
 
   <!-- Dog name setup overlay -->
   <div id="setup" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Hundename eingeben">
@@ -454,11 +482,11 @@ const PHASES = [
 ];
 
 const DAYS = [
-  { id:1,  title:'Die 2-Minuten-Decke',
-    goal:'Die Decke wird ein Ort, an dem dein Hund zur Ruhe kommt.',
-    instructions:'Leg eine Decke auf den Boden. Belohne jedes Hinschauen, Hingehen und Betreten. Legt sich dein Hund ab, belohne ruhig zwischen seinen Vorderpfoten. Belohne Ruhe, nicht Aktivität.',
-    levels:{ easy:'Dein Hund betritt die Decke.', medium:'Er legt sich hin und bleibt 30 Sekunden liegen.', hard:'Er bleibt 2 Minuten entspannt liegen, während du dich setzt oder kurz aufstehst.' },
-    reps:'5–10 kurze Durchgänge', tip:'Leise loben und langsam füttern – das beruhigt.' },
+  { id:1,  title:'Ruhe auf der Decke',
+    goal:'Dein Hund bleibt ruhig auf der Decke, bis du ihn auflöst.',
+    instructions:'Voraussetzung: Dein Hund kennt das Wort „Decke“ oder ein anderes Signal dafür.\n\nSchick deinen Hund mit deinem Signal auf die Decke. Bleibt er 30 Sekunden dort, geh zu ihm hin und löse ihn mit deinem Freigabesignal auf. Dann schickst du ihn wieder auf die Decke. Steht er vorher auf, führst du ihn kommentarlos zurück. Kein Leckerli, kein Lob – dein Hund darf erst aufstehen, wenn er das Freigabesignal bekommt.',
+    levels:{ easy:'Du schickst deinen Hund auf die Decke und bleibst in der Nähe. Nach 30 Sekunden gehst du hin und löst ihn auf.', medium:'Du schickst deinen Hund auf die Decke und setzt dich selbst irgendwo auf einen Stuhl. Gleiches Prinzip.', hard:'Du schickst deinen Hund auf die Decke und verlässt kurz den Raum. Gleiches Prinzip.' },
+    reps:'5–10 kurze Durchgänge', tip:'Bleib ruhig und sachlich. Ob dein Hund aufstehen darf, entscheidest immer du – mit deinem Freigabesignal.' },
 
   { id:2,  title:'Blickkontakt auf Signal',
     goal:'Dein Hund schaut dich auf ein Signal hin an.',
@@ -588,26 +616,57 @@ function defaultState() {
 
 let S = loadState() || defaultState();
 
-// ── Tages-Sperre ────────────────────────────────────────────────────────────
+// ── Admin & Cookies ──────────────────────────────────────────────────────────
+function getCookieVal(name) {
+  const m = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]+)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+const IS_ADMIN = getCookieVal('ch_admin') === '1';
+
+let adminSimDay = null; // null = alle frei
+
+// ── Videos ───────────────────────────────────────────────────────────────────
+let VIDEOS = {};
+fetch('/winter-challenge/videos.json').then(r => r.json()).then(d => { VIDEOS = d; }).catch(() => {});
+
+async function loadVideo(dayId, level) {
+  const videoId = VIDEOS[String(dayId)]?.[level];
+  if (!videoId) return null;
+  try {
+    const r = await fetch(`/winter-challenge/video-token?v=${encodeURIComponent(videoId)}`);
+    if (!r.ok) return null;
+    const { url } = await r.json();
+    return url || null;
+  } catch { return null; }
+}
+
+// ── Wochenweise Freischaltung ─────────────────────────────────────────────────
+function getStartDate() { return getCookieVal('ch_start'); }
+
 function today() { return new Date().toISOString().split('T')[0]; }
 
 function isUnlocked(dayId) {
-  const idx = ALL_DAYS.findIndex(d => d.id === dayId);
-  if (idx <= 0) return true; // erster Tag immer frei
-  const prevId    = ALL_DAYS[idx - 1].id;
-  const prevState = S.days[prevId];
-  if (!prevState?.done || !prevState?.doneDate) return false;
-  return prevState.doneDate < today(); // gestern oder früher abgehakt
+  if (IS_ADMIN) {
+    if (adminSimDay === null) return true; // admin: alle frei
+    return dayId <= 7 ? adminSimDay >= 1 : adminSimDay >= 8;
+  }
+  const startStr = getStartDate();
+  if (!startStr || startStr === 'admin') return true;
+  const todayStr = today();
+  if (todayStr < startStr) return false; // vor Startdatum (Fallback, Server macht das auch)
+  if (dayId <= 7) return true; // Woche 1 immer verfügbar ab Startdatum
+  // Woche 2 + Bonus: Startdatum + 7 Tage
+  const week2 = new Date(startStr);
+  week2.setDate(week2.getDate() + 7);
+  return todayStr >= week2.toISOString().split('T')[0];
 }
 
 function unlockDateFor(dayId) {
-  const idx = ALL_DAYS.findIndex(d => d.id === dayId);
-  if (idx <= 0) return null;
-  const prevId    = ALL_DAYS[idx - 1].id;
-  const prevState = S.days[prevId];
-  if (!prevState?.done || !prevState?.doneDate) return null;
-  const d = new Date(prevState.doneDate);
-  d.setDate(d.getDate() + 1);
+  if (dayId <= 7) return null;
+  const startStr = getStartDate();
+  if (!startStr || startStr === 'admin') return null;
+  const d = new Date(startStr);
+  d.setDate(d.getDate() + 7);
   return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long' });
 }
 
@@ -657,8 +716,10 @@ function buildCard(day) {
   if (locked) {
     const unlockDate = unlockDateFor(day.id);
     const hint = unlockDate
-      ? `Verfügbar ab ${unlockDate}`
-      : `Erledige zuerst Tag ${ALL_DAYS[ALL_DAYS.findIndex(d => d.id === day.id) - 1].id}`;
+      ? `Woche 2 startet am ${unlockDate}`
+      : day.id <= 7
+        ? 'Startet mit Beginn deiner Challenge'
+        : 'Verfügbar ab Woche 2';
     return `
 <div class="day-card is-locked" id="day-${day.id}">
   <div class="day-summary">
@@ -695,6 +756,7 @@ function buildCard(day) {
       <span class="levels-legend">Deine Stufe</span>
       <div class="levels-row" id="lvrow-${day.id}">${levelOpts}</div>
       <div class="level-desc" id="lvdesc-${day.id}">${descText}</div>
+      <div id="video-${day.id}"></div>
     </div>
 
     <div class="day-meta-row">🔁 <span><strong>Wiederholungen:</strong> ${day.reps}</span></div>
@@ -766,11 +828,24 @@ function attachCardEvents(id) {
   // Level radios
   document.querySelectorAll(`input[name="lv${id}"]`).forEach(radio => {
     radio.addEventListener('change', () => {
+      const dayData = ALL_DAYS.find(d => d.id === id);
       S.days[id].level = radio.value;
       saveState(S);
-      document.getElementById('lvdesc-' + id).innerHTML = DAYS.find(d => d.id === id).levels[radio.value];
+      document.getElementById('lvdesc-' + id).innerHTML = dayData.levels[radio.value];
       document.querySelectorAll(`#lvrow-${id} .level-btn`).forEach(l => l.classList.remove('selected'));
       radio.closest('.level-btn').classList.add('selected');
+      // Video laden
+      const videoWrap = document.getElementById('video-' + id);
+      if (videoWrap) {
+        videoWrap.innerHTML = '<p class="video-loading">Video wird geladen …</p>';
+        loadVideo(id, radio.value).then(url => {
+          if (url) {
+            videoWrap.innerHTML = `<div class="video-wrap"><iframe src="${url}" allowfullscreen loading="lazy" allow="autoplay"></iframe></div>`;
+          } else {
+            videoWrap.innerHTML = '';
+          }
+        });
+      }
     });
   });
 
@@ -877,6 +952,29 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   renderProgress();
   document.getElementById('completion').classList.add('hidden');
 });
+
+// ── Admin-Bar ─────────────────────────────────────────────────────────────────
+if (IS_ADMIN) {
+  const bar    = document.getElementById('admin-bar');
+  const slider = document.getElementById('admin-sim-day');
+  const valEl  = document.getElementById('admin-day-val');
+  const allBtn = document.getElementById('admin-all-btn');
+  bar.classList.remove('hidden');
+
+  slider.addEventListener('input', () => {
+    adminSimDay = parseInt(slider.value, 10);
+    valEl.textContent = adminSimDay;
+    renderDays();
+    renderProgress();
+  });
+  allBtn.addEventListener('click', () => {
+    adminSimDay = null;
+    slider.value = 1;
+    valEl.textContent = '1';
+    renderDays();
+    renderProgress();
+  });
+}
 
 // ── Init ─────────────────────────────────────────────────────────────────────
 updateDogDisplay();
